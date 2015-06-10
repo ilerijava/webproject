@@ -27,15 +27,13 @@ public class ColorServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		/*
-		 * out.println("<html> \n" + "<body> \n" +
-		 * "<font size=\"12px\" color=\"" + color + "\">" + "Merhaba " +
-		 * list.get(0).getTanim() + "</font> \n" + "</body> \n" + "</html>");
-		 */
+		out.println("<html> \n" + "<body> \n" + "<font size=\"12px\" color=\""
+				+ color + "\">" + "Merhaba " + "</font> \n" + "</body> \n"
+				+ "</html>");
 
-		for (Il il : list) {
-			out.println(il.getTanim());
-		}
+		/*
+		 * for (Il il : list) { out.println(il.getTanim()); }
+		 */
 
 	}
 
