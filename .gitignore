@@ -16,6 +16,10 @@ hs_err_pid*
 .project
 .settings/
 
+# Maven
+target/
+**/target/
+
 # =========================
 # Operating System Files
 # =========================
