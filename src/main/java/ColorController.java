@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.tutev.personelozluk.entity.Il;
 import com.tutev.personelozluk.service.IlServis;
 
-public class ColorServlet extends HttpServlet {
+public class ColorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private IlServis ilServis = new IlServis();
@@ -21,6 +21,7 @@ public class ColorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		List<Il> list = ilServis.getAll();
 
 		String color = request.getParameter("color");
@@ -31,9 +32,11 @@ public class ColorServlet extends HttpServlet {
 				+ color + "\">" + "Merhaba " + "</font> \n" + "</body> \n"
 				+ "</html>");
 
-		/*
-		 * for (Il il : list) { out.println(il.getTanim()); }
-		 */
+		
+		  for (Il il : list) { 
+			  out.println(il.getTanim()); 
+			  }
+		 
 
 	}
 

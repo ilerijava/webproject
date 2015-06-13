@@ -23,61 +23,71 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "KISI")
-public class Kisi implements Serializable{
-    
-    Long id;
-    String ad;
-    String soyad;
-    String tcKimlikNo;
-    Adres adres;
+public class Kisi implements Serializable {
 
-    @Id
-    @SequenceGenerator(name = "kisi_seq", sequenceName = "kisi_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "kisi_seq")
-    @Column(name = "KISI_ID")
-    public Long getId() {
-        return id;
-    }
+	Long id;
+	String ad;
+	String soyad;
+	String tcKimlikNo;
+	private String sifre;
+	Adres adres;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Id
+	@SequenceGenerator(name = "kisi_seq", sequenceName = "kisi_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "kisi_seq")
+	@Column(name = "KISI_ID")
+	public Long getId() {
+		return id;
+	}
 
-    @Column(name = "KISI_AD",length = 100)
-    public String getAd() {
-        return ad;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setAd(String ad) {
-        this.ad = ad;
-    }
+	@Column(name = "KISI_AD", length = 100)
+	public String getAd() {
+		return ad;
+	}
 
-    @Column(name = "KISI_SOYAD",length = 100)
-    public String getSoyad() {
-        return soyad;
-    }
+	public void setAd(String ad) {
+		this.ad = ad;
+	}
 
-    public void setSoyad(String soyad) {
-        this.soyad = soyad;
-    }
+	@Column(name = "KISI_SOYAD", length = 100)
+	public String getSoyad() {
+		return soyad;
+	}
 
-    @Column(name = "KISI_TCKN",length = 11)
-    public String getTcKimlikNo() {
-        return tcKimlikNo;
-    }
+	public void setSoyad(String soyad) {
+		this.soyad = soyad;
+	}
 
-    public void setTcKimlikNo(String tcKimlikNo) {
-        this.tcKimlikNo = tcKimlikNo;
-    }
+	@Column(name = "KISI_TCKN", length = 11)
+	public String getTcKimlikNo() {
+		return tcKimlikNo;
+	}
 
-    @ManyToOne(optional = true)
-    @JoinColumn(columnDefinition = "ADRES_ID")
-    public Adres getAdres() {
-        return adres;
-    }
+	public void setTcKimlikNo(String tcKimlikNo) {
+		this.tcKimlikNo = tcKimlikNo;
+	}
 
-    public void setAdres(Adres adres) {
-        this.adres = adres;
-    }    
-    
+	@Column(name = "KISI_SIFRE", unique = true)
+	public String getSifre() {
+		return sifre;
+	}
+
+	public void setSifre(String sifre) {
+		this.sifre = sifre;
+	}
+
+	@ManyToOne(optional = true)
+	@JoinColumn(columnDefinition = "ADRES_ID")
+	public Adres getAdres() {
+		return adres;
+	}
+
+	public void setAdres(Adres adres) {
+		this.adres = adres;
+	}
+
 }
