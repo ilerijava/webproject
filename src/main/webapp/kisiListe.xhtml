@@ -11,11 +11,10 @@
 </h:head>
 <h:body>
 	<h:form id="form">
-		<p:dataTable var="kisi" editable="true" value="#{kisiView.kisiList}">
+		<p:dataTable id="dataTable1" var="kisi" editable="true"
+			value="#{kisiView.kisiList}">
 
 			<p:ajax event="rowEdit" listener="#{kisiView.satirDuzenle}"></p:ajax>
-			<p:ajax event="rowEdit" listener="#{kisiView.satirIptal}"></p:ajax>
-			<p:ajax event="rowEdit" listener="#{kisiView.satirSil}"></p:ajax>
 
 			<p:column headerText="Adı">
 				<p:cellEditor>
@@ -54,10 +53,24 @@
 				<p:rowEditor></p:rowEditor>
 			</p:column>
 
+			<p:column>
+				<p:commandButton update="confirmDialog1" type="button" value="Sil"
+					onclick="confirmDialog1.show()">
 
+					<p:confirmDialog header="Uyarı" id="confirmDialog2" widgetVar="comfirmDialog1"
+						message="Silmek istediğinize emin misiniz?">
+						<p:commandButton value="Evet" icon="ui-icon-trash"
+							actionListener="#{kisiView.satirSil(kisi)}"></p:commandButton>
+						<p:commandButton value="Hayır" icon="ui-icon-close"></p:commandButton>
+					</p:confirmDialog>
 
+				</p:commandButton>
+
+			</p:column>
 
 		</p:dataTable>
+
+
 
 
 	</h:form>

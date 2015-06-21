@@ -5,16 +5,13 @@
  */
 package com.tutev.personelozluk.dao;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Property;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.tutev.personelozluk.entity.Kisi;
 
 /**
  *
@@ -27,9 +24,11 @@ public class GenericDao {
 	public Object save(Object object) {
 		try {
 			Session session = gettSessionFactory().openSession();
-			session.beginTransaction();
+			Transaction tx = session.beginTransaction();
 			session.save(object);
 			session.flush();
+			tx.commit();
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,8 +38,11 @@ public class GenericDao {
 	public Object saveOrUpdate(Object object) {
 		try {
 			Session session = gettSessionFactory().openSession();
+			Transaction tx = session.beginTransaction();
 			session.saveOrUpdate(object);
 			session.flush();
+			tx.commit();
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,8 +52,11 @@ public class GenericDao {
 	public void delete(Object object) {
 		try {
 			Session session = gettSessionFactory().openSession();
+			Transaction tx = session.beginTransaction();
 			session.delete(object);
 			session.flush();
+			tx.commit();
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
