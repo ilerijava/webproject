@@ -12,8 +12,27 @@
 <h:body>
 	<h1>Hello World PrimeFaces</h1>
 
-	<h:form>
-	<p:editor value="#{editor.value}" />
+
+	<h:form >
+		<p:editor id="editor" widgetVar="editor" value="#{editor.value}"
+			width="600" />
+
+		<h:panelGrid columns="2" style="margin-top: 10px">
+			<p:commandButton value="Submit" update="display"
+				oncomplete="dlg.show()" icon="ui-icon-disk" />
+
+			<p:commandButton value="Clear" type="button"
+				onclick="editor.clear();" icon="ui-icon-close" />
+		</h:panelGrid>
+
+		<p:dialog header="Uyarı" widgetVar="dlg" showEffect="fade"
+			hideEffect="fade">
+			<h:outputText id="display" value="#{editor.value}" escape="false" />
+		</p:dialog>
+
+
+
+
 	</h:form>
 
 </h:body>

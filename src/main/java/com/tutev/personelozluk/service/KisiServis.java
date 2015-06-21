@@ -6,6 +6,8 @@
 
 package com.tutev.personelozluk.service;
 
+import java.util.List;
+
 import com.tutev.personelozluk.dao.GenericDao;
 import com.tutev.personelozluk.entity.Kisi;
 
@@ -33,6 +35,17 @@ public class KisiServis {
     public void delete(Kisi kisi){
         genericDao.delete(kisi);
     }
+    
+    public List<Kisi> getAll(){
+    	return (List<Kisi>) genericDao.get(Kisi.class);
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
 }
