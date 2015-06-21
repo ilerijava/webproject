@@ -5,6 +5,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.RowEditEvent;
+
 import com.tutev.personelozluk.entity.Kisi;
 import com.tutev.personelozluk.service.KisiServis;
 
@@ -29,6 +31,23 @@ public class KisiBean implements Serializable {
 
 	public void setKisiList(List<Kisi> kisiList) {
 		this.kisiList = kisiList;
+	}
+	
+	public void satirDuzenle(RowEditEvent event){
+		
+				
+		
+	}
+	
+	
+	public void satirIptal(RowEditEvent event){
+		
+	}
+	
+	public void satirSil(RowEditEvent event){
+		
+		
+		
 	}
 
 }

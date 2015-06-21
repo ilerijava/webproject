@@ -10,18 +10,62 @@
 	<title>Kişi Listesi</title>
 </h:head>
 <h:body>
+	<h:form id="form">
+		<p:dataTable var="kisi" editable="true" value="#{kisiView.kisiList}">
 
- <p:dataTable var="kisi" value="#{kisiView.kisiList}">
-   	<p:column headerText="Adı">
-   		<h:outputText value="#{kisi.ad}"></h:outputText>
-   	</p:column>
-   	   	<p:column headerText="Soyadı">
-   		<h:outputText value="#{kisi.soyad}"></h:outputText>
-   	</p:column>
-   	   	<p:column headerText="TC Kimlik No">
-   		<h:outputText value="#{kisi.tcKimlikNo}"></h:outputText>
-   	</p:column>
- </p:dataTable>
+			<p:ajax event="rowEdit" listener="#{kisiView.satirDuzenle}"></p:ajax>
+			<p:ajax event="rowEdit" listener="#{kisiView.satirIptal}"></p:ajax>
+			<p:ajax event="rowEdit" listener="#{kisiView.satirSil}"></p:ajax>
+
+			<p:column headerText="Adı">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kisi.ad}"></h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{kisi.ad}"></h:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Soyadı">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kisi.soyad}"></h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{kisi.soyad}"></h:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="TC Kimlik No">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{kisi.tcKimlikNo}"></h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{kisi.tcKimlikNo}"></h:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column>
+				<p:rowEditor></p:rowEditor>
+			</p:column>
+
+
+
+
+		</p:dataTable>
+
+
+	</h:form>
 
 </h:body>
 </html>
+
+
+
+
+
