@@ -11,10 +11,19 @@
 </h:head>
 <h:body>
 	<h:form id="form">
-		<p:dataTable id="dataTable1" var="kisi" editable="true"
-			value="#{kisiView.kisiList}">
+		<p:growl id="msgs" showDetail="true" />
 
-			<p:ajax event="rowEdit" listener="#{kisiView.satirDuzenle}"></p:ajax>
+		<p:dataTable id="dataTable1" var="kisi" editable="true"
+			value="#{kisiView.kisiList}" style="margin-bottom:20px">
+
+			<f:facet name="header">
+          	 Kişi Listesi
+      		</f:facet>
+
+			<p:ajax event="rowEdit" listener="#{kisiView.satirDuzenle}"
+				update=":form:msgs"></p:ajax>
+			<p:ajax event="rowEditCancel" listener="#{kisiView.satirIptal}"
+				update=":form:msgs"></p:ajax>
 
 			<p:column headerText="Adı">
 				<p:cellEditor>
@@ -54,27 +63,20 @@
 			</p:column>
 
 			<p:column>
-				<p:commandButton update="confirmDialog1" type="button" value="Sil"
-					onclick="confirmDialog1.show()">
-
-					<p:confirmDialog header="Uyarı" id="confirmDialog2" widgetVar="comfirmDialog1"
-						message="Silmek istediğinize emin misiniz?">
-						<p:commandButton value="Evet" icon="ui-icon-trash"
-							actionListener="#{kisiView.satirSil(kisi)}"></p:commandButton>
-						<p:commandButton value="Hayır" icon="ui-icon-close"></p:commandButton>
-					</p:confirmDialog>
-
+				<p:commandButton update="confirmDialog1" type="button" value="Sil">
+					<p:confirm header="Uyarı" message="Silmek istediğinize emin misiniz?"
+						icon="ui-icon-alert" update="message"/>
 				</p:commandButton>
 
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+					<p:commandButton value="Evet" icon="ui-icon-trash"
+						actionListener="#{kisiView.satirSil(kisi)}"></p:commandButton>
+					<p:commandButton value="Hayır" icon="ui-icon-close"></p:commandButton>
+				</p:confirmDialog>
+
 			</p:column>
-
 		</p:dataTable>
-
-
-
-
 	</h:form>
-
 </h:body>
 </html>
 

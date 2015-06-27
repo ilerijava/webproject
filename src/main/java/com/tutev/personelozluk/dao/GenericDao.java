@@ -5,13 +5,11 @@
  */
 package com.tutev.personelozluk.dao;
 
-
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
 
 /**
  *
@@ -19,11 +17,11 @@ import org.hibernate.criterion.Restrictions;
  */
 public class GenericDao {
 
-	SessionFactory tSessionFactory;
+	SessionFactory sessionFactory;
 
 	public Object save(Object object) {
 		try {
-			Session session = gettSessionFactory().openSession();
+			Session session = getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
 			session.save(object);
 			session.flush();
@@ -37,7 +35,7 @@ public class GenericDao {
 
 	public Object saveOrUpdate(Object object) {
 		try {
-			Session session = gettSessionFactory().openSession();
+			Session session = getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
 			session.saveOrUpdate(object);
 			session.flush();
@@ -51,7 +49,7 @@ public class GenericDao {
 
 	public void delete(Object object) {
 		try {
-			Session session = gettSessionFactory().openSession();
+			Session session = getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
 			session.delete(object);
 			session.flush();
@@ -65,7 +63,7 @@ public class GenericDao {
 	public Object get(Class cls) {
 		Object o = null;
 		try {
-			Session session = gettSessionFactory().openSession();
+			Session session = getSessionFactory().openSession();
 			o = session.createCriteria(cls).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,26 +71,30 @@ public class GenericDao {
 		return o;
 	}
 
-	public Object getById(Long id) {
+	public Object getById(Class cls, Long id) {
 		Object o = null;
 		try {
-			Session session = gettSessionFactory().openSession();
-			o = session.get(id.toString(), null);
+			Session session = getSessionFactory().openSession();
+			Transaction tx = session.beginTransaction();
+			o = session.get(cls, id);
+			session.flush();
+			tx.commit();
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return o;
 	}
 
-	public SessionFactory gettSessionFactory() {
-		return THibernateUtil.getSessionFactory();
+	public SessionFactory getSessionFactory() {
+		return HibernateUtil.getSessionFactory();
 	}
 
 	public Object get(String[] parameterNames, String[] parameterValues,
 			Class cls) {
 		Object o = null;
 		try {
-			Session session = gettSessionFactory().openSession();
+			Session session = getSessionFactory().openSession();
 
 			Criteria criteria = session.createCriteria(cls);
 

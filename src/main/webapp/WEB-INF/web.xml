@@ -4,17 +4,6 @@
 
 <web-app>
 	<display-name>İleri Java Web Uygulaması</display-name>
-
-	<servlet>
-		<servlet-name>Color</servlet-name>
-		<servlet-class>ColorController</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>Login</servlet-name>
-		<servlet-class>LoginController</servlet-class>
-	</servlet>
-
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -23,36 +12,10 @@
 
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Color</servlet-name>
-		<url-pattern>/ColorServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
-		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
-
-
-
-
-
-
-
-
-
-
-
 </web-app>

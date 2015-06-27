@@ -9,35 +9,35 @@ package com.tutev.personelozluk.service;
 import java.util.List;
 
 import com.tutev.personelozluk.dao.GenericDao;
-import com.tutev.personelozluk.entity.Il;
+import com.tutev.personelozluk.entity.Ilce;
 
 /**
  *
  * @author Tutev
  */
-public class IlServis {
+public class IlceServis {
 	GenericDao genericDao = new GenericDao();
 
-	public void save(Il il) {
-		if (il.getId() == null) {
+	public void save(Ilce ilce) {
+		if (ilce.getId() == null) {
 			return;
 		}
-		genericDao.save(il);
+		genericDao.save(ilce);
 	}
 
-	public void update(Il il) {
-		if (il.getId() == null) {
+	public void update(Ilce ilce) {
+		if (ilce.getId() == null) {
 			return;
 		}
-		genericDao.saveOrUpdate(il);
+		genericDao.saveOrUpdate(ilce);
 	}
 
-	public void delete(Il il) {
-		genericDao.delete(il);
+	public void delete(Ilce ilce) {
+		genericDao.delete(ilce);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Il> getAll() {
-		return (List<Il>) genericDao.get(Il.class);
+	public List<Ilce> getAll() {
+		return (List<Ilce>) genericDao.get(Ilce.class);
 	}
 }

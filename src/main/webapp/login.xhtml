@@ -6,8 +6,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Login sayfası</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login sayfası</title>
 
 </h:head>
 <h:body>
@@ -15,20 +15,22 @@
 	<h:form>
 		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
-			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel for="kullaniciAdi" value="Kullanıcı Adı : " />
-				<p:inputText id="kullaniciAdi" value="#{loginBean.kullaniciAdi}"
-					required="true" label="kullaniciAdi" />
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel for="kullaniciAdi" value="Kullanıcı Adı : " />
+			<p:inputText id="kullaniciAdi"
+				value="#{loginBean.kullaniciAdi}"
+				required="true" label="kullaniciAdi" />
 
-				<h:outputLabel for="sifre" value="Şifre : " />
-				<p:password id="sifre" value="#{loginBean.sifre}" required="true"
-					label="sifre" />
+			<h:outputLabel for="sifre" value="Şifre : " />
+			<p:password id="sifre"
+				value="#{loginBean.sifre}"
+				required="true" label="sifre" />
 
-				<f:facet name="footer">
-					<p:commandButton value="Login" update="growl"
-						actionListener="#{loginBean.login}" />
-				</f:facet>
-			</h:panelGrid>
+			<f:facet name="footer">
+				<p:commandButton value="Login" update="growl"
+					actionListener="#{loginBean.login}" />
+			</f:facet>
+		</h:panelGrid>
 
 	</h:form>
 </h:body>

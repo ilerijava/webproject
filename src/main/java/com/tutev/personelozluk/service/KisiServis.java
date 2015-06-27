@@ -16,36 +16,32 @@ import com.tutev.personelozluk.entity.Kisi;
  * @author Tutev
  */
 public class KisiServis {
-    GenericDao genericDao=new GenericDao();
-    
-    public void save(Kisi kisi){
-        if(kisi.getAd()==null && kisi.getTcKimlikNo()==null){
-            return;
-        }
-        genericDao.save(kisi);
-    }
-    
-    public void update(Kisi kisi){
-        if(kisi.getAd()==null&& kisi.getTcKimlikNo()==null){
-            return;
-        }
-        genericDao.saveOrUpdate(kisi);
-    }
-    
-    public void delete(Kisi kisi){
-        genericDao.delete(kisi);
-    }
-    
-    public List<Kisi> getAll(){
-    	return (List<Kisi>) genericDao.get(Kisi.class);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	GenericDao genericDao = new GenericDao();
+
+	public void save(Kisi kisi) {
+		if (kisi.getId() == null && kisi.getTcKimlikNo() == null) {
+			return;
+		}
+		genericDao.save(kisi);
+	}
+
+	public void update(Kisi kisi) {
+		if (kisi.getId() == null && kisi.getTcKimlikNo() == null) {
+			return;
+		}
+		genericDao.saveOrUpdate(kisi);
+	}
+
+	public void delete(Kisi kisi) {
+		genericDao.delete(kisi);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Kisi> getAll() {
+		return (List<Kisi>) genericDao.get(Kisi.class);
+	}
+	
+	public Kisi get(Kisi kisi){
+		return (Kisi) genericDao.getById(Kisi.class, kisi.getId());
+	}
 }

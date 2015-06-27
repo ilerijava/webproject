@@ -1,19 +1,17 @@
-import java.io.IOException;
-import java.io.Serializable;
+
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.ExternalContextWrapper;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.tutev.personelozluk.entity.Kisi;
 import com.tutev.personelozluk.service.LoginServis;
 
-@ManagedBean
-
+@ManagedBean(name = "loginBean")
+@ViewScoped
 public class LoginBean {
 
 	private String kullaniciAdi;
@@ -48,7 +46,7 @@ public class LoginBean {
 					"Kullanýcý giriþi baþarýlý");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			FacesContext.getCurrentInstance().
-			  getExternalContext().redirect("kisiListe.xhtml");
+			  getExternalContext().redirect("kisi.xhtml");
 		} else {
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hata",
 					"Kullanýcý giriþi baþarýsýz");
