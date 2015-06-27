@@ -19,7 +19,7 @@ public class KisiServis {
 	GenericDao genericDao = new GenericDao();
 
 	public void save(Kisi kisi) {
-		if (kisi.getId() == null && kisi.getTcKimlikNo() == null) {
+		if (kisi.getTcKimlikNo() == null) {
 			return;
 		}
 		genericDao.save(kisi);

@@ -20,7 +20,7 @@ public class KisiBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Kisi> kisiList;
-
+	
 	private KisiServis kisiServis = new KisiServis();
 
 	@PostConstruct

@@ -40,4 +40,8 @@ public class IlceServis {
 	public List<Ilce> getAll() {
 		return (List<Ilce>) genericDao.get(Ilce.class);
 	}
+
+	public Ilce getById(String id) {
+		return (Ilce) genericDao.getById(Ilce.class, new Long(id));
+	}
 }

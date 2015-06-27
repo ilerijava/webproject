@@ -60,8 +60,9 @@ public class Adres implements Serializable{
     public void setIl(Il il) {
         this.il = il;
     }
-
-    @Column(name = "ILCE_ID")
+    
+    @ManyToOne(optional = true)
+    @JoinColumn(columnDefinition = "ILCE_ID")
     public Ilce getIlce() {
         return ilce;
     }

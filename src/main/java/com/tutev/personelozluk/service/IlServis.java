@@ -40,4 +40,8 @@ public class IlServis {
 	public List<Il> getAll() {
 		return (List<Il>) genericDao.get(Il.class);
 	}
+
+	public Il getById(String id) {
+		return (Il) genericDao.getById(Il.class, new Long(id));
+	}
 }

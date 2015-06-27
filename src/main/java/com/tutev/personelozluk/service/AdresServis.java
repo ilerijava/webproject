@@ -18,11 +18,8 @@ import com.tutev.personelozluk.entity.Adres;
 public class AdresServis {
 	GenericDao genericDao = new GenericDao();
 
-	public void save(Adres adres) {
-		if (adres.getId() == null) {
-			return;
-		}
-		genericDao.save(adres);
+	public Adres save(Adres adres) {
+		return (Adres) genericDao.save(adres);
 	}
 
 	public void update(Adres adres) {
