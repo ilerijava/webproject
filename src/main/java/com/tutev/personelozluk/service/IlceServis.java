@@ -9,7 +9,9 @@ package com.tutev.personelozluk.service;
 import java.util.List;
 
 import com.tutev.personelozluk.dao.GenericDao;
+import com.tutev.personelozluk.entity.Il;
 import com.tutev.personelozluk.entity.Ilce;
+import com.tutev.personelozluk.entity.Kisi;
 
 /**
  *
@@ -17,6 +19,8 @@ import com.tutev.personelozluk.entity.Ilce;
  */
 public class IlceServis {
 	GenericDao genericDao = new GenericDao();
+	
+	IlServis ilServis = new IlServis();
 
 	public void save(Ilce ilce) {
 		if (ilce.getId() == null) {
@@ -43,5 +47,15 @@ public class IlceServis {
 
 	public Ilce getById(String id) {
 		return (Ilce) genericDao.getById(Ilce.class, new Long(id));
+	}
+
+	public List<Ilce> getAllById(String ilID) {
+		Il il = ilServis.getById(ilID);
+		String[] parameterNames = { "il" };
+		Object[] parameterValues = { il };
+
+		List<Ilce> list = (List<Ilce>) genericDao.get(parameterNames,
+				parameterValues, Ilce.class);
+		return list;
 	}
 }

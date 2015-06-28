@@ -57,6 +57,10 @@ public class KisiBean implements Serializable {
 				kisi.getAd() + " " + kisi.getSoyad());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	public void listeYenile(){
+		setKisiList(kisiServis.getAll());
+	}
 
 
 }

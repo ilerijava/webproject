@@ -90,7 +90,7 @@ public class GenericDao {
 		return HibernateUtil.getSessionFactory();
 	}
 
-	public Object get(String[] parameterNames, String[] parameterValues,
+	public Object get(String[] parameterNames, Object[] parameterValues,
 			Class cls) {
 		Object o = null;
 		try {

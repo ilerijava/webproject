@@ -2,12 +2,15 @@ package KisiBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import com.tutev.personelozluk.entity.Adres;
 import com.tutev.personelozluk.entity.Il;
@@ -20,8 +23,9 @@ import com.tutev.personelozluk.service.KisiServis;
 
 @ManagedBean(name = "kisiEkle")
 @ViewScoped
-public class KisiEkleBean implements Serializable{
+public class KisiEkleBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	IlServis ilServis = new IlServis();
 	IlceServis ilceServis = new IlceServis();
 	KisiServis kisiServis = new KisiServis();
@@ -29,17 +33,17 @@ public class KisiEkleBean implements Serializable{
 
 	private String ad;
 	private String soyad;
-	private String kimlikNo;
+	private String tcKimlikNo;
 	private String sifre;
-	private String adres;
+	private String adresTanim;
 	private String ilID;
 	private String ilceID;
-	private Kisi kisi;
 
-	private List<Il> ilList;
-	private List<Ilce> ilceList;
+	private Kisi selectedKisi = new Kisi();
 
-	
+	private List<Il> ilList = new ArrayList<Il>();
+	private List<Ilce> ilceList = new ArrayList<Ilce>();
+
 	@PostConstruct
 	public void initialize() {
 		setIlList((ilServis.getAll()));
@@ -62,12 +66,12 @@ public class KisiEkleBean implements Serializable{
 		this.soyad = soyad;
 	}
 
-	public String getKimlikNo() {
-		return kimlikNo;
+	public String getTcKimlikNo() {
+		return tcKimlikNo;
 	}
 
-	public void setKimlikNo(String kimlikNo) {
-		this.kimlikNo = kimlikNo;
+	public void setTcKimlikNo(String tcKimlikNo) {
+		this.tcKimlikNo = tcKimlikNo;
 	}
 
 	public String getSifre() {
@@ -78,15 +82,14 @@ public class KisiEkleBean implements Serializable{
 		this.sifre = sifre;
 	}
 
-	public String getAdres() {
-		return adres;
+	public String getAdresTanim() {
+		return adresTanim;
 	}
 
-	public void setAdres(String adres) {
-		this.adres = adres;
+	public void setAdresTanim(String adresTanim) {
+		this.adresTanim = adresTanim;
 	}
 
-	
 	public String getIlID() {
 		return ilID;
 	}
@@ -119,50 +122,29 @@ public class KisiEkleBean implements Serializable{
 		this.ilceList = ilceList;
 	}
 
-	public Kisi getKisi() {
-		return kisi;
-	}
-
-	public void setKisi(Kisi kisi) {
-		this.kisi = kisi;
-	}
-
 	public void kaydet() {
-		Kisi kisi = new Kisi();
-		kisi.setAd(ad);
-		kisi.setSoyad(soyad);
-		kisi.setSifre(sifre);
-		kisi.setTcKimlikNo(kimlikNo);
-		
-		Adres ads = new Adres();
-		ads.setAdresTanim(adres);
-		
-		Il il = ilServis.getById(getIlID());
-		ads.setIl(il);
-		
-		Ilce ilce = ilceServis.getById(getIlceID());
-		
-		ads.setIlce(ilce);
-		
-		Adres adres2 = adresServis.save(ads);
-		kisi.setAdres(adres2);
-		
-		kisiServis.save(kisi);
-	}
-	
-	
-	public void ilChange(){
-		System.out.println("geldi");
-		if(getIlID() != null){
-			List<Ilce> temp = new ArrayList<Ilce>();
-			for (Ilce ilce : ilceList) {
-				if(ilce.getIl().getId().equals(getIlID())){
-					temp.add(ilce);
-				}
-			}
-			
-			ilceList = temp;
-		}
+		Adres kayitliAdres = adresServis.save(selectedKisi.getAdres());
+
+		selectedKisi.setAdres(kayitliAdres);
+
+		kisiServis.save(selectedKisi);
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Kiþi Kaydedildi", selectedKisi.getAd() + " "
+						+ selectedKisi.getSoyad());
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
+	public void ilChange() {
+		List<Ilce> ilceler = ilceServis.getAllById(getIlID());
+		ilceList.clear();
+		ilceList.addAll(ilceler);
+	}
+
+	public Kisi getSelectedKisi() {
+		return selectedKisi;
+	}
+
+	public void setSelectedKisi(Kisi selectedKisi) {
+		this.selectedKisi = selectedKisi;
+	}
 }

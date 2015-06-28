@@ -30,7 +30,7 @@ public class Kisi implements Serializable {
 	String soyad;
 	String tcKimlikNo;
 	private String sifre;
-	Adres adres;
+	Adres adres = new Adres();
 
 	@Id
 	@SequenceGenerator(name = "kisi_seq", sequenceName = "kisi_seq", allocationSize = 1)

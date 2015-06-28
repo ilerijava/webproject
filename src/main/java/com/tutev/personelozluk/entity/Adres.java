@@ -26,8 +26,8 @@ public class Adres implements Serializable{
 
     Long id;
     String adresTanim;
-    Il il;
-    Ilce ilce;
+    Il il = new Il(); 
+    Ilce ilce = new Ilce();
 
     @Id
     @SequenceGenerator(name = "adres_seq", sequenceName = "adres_seq", allocationSize = 1)
