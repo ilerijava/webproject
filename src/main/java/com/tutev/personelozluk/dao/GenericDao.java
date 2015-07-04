@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -64,7 +65,7 @@ public class GenericDao {
 		Object o = null;
 		try {
 			Session session = getSessionFactory().openSession();
-			o = session.createCriteria(cls).list();
+			o = session.createCriteria(cls).addOrder(Order.desc("id")).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

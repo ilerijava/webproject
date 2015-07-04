@@ -22,11 +22,8 @@ public class IlceServis {
 	
 	IlServis ilServis = new IlServis();
 
-	public void save(Ilce ilce) {
-		if (ilce.getId() == null) {
-			return;
-		}
-		genericDao.save(ilce);
+	public Ilce save(Ilce ilce) {
+		return (Ilce) genericDao.save(ilce);
 	}
 
 	public void update(Ilce ilce) {

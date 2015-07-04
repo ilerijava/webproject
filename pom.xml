@@ -23,6 +23,15 @@
 	</repositories>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.fluttercode.datafactory</groupId>
+			<artifactId>datafactory</artifactId>
+			<version>0.8</version>
+			<type>jar</type>
+		</dependency>
+
+
 		<!-- PrimeFaces -->
 		<dependency>
 			<groupId>org.primefaces</groupId>

@@ -18,11 +18,8 @@ import com.tutev.personelozluk.entity.Il;
 public class IlServis {
 	GenericDao genericDao = new GenericDao();
 
-	public void save(Il il) {
-		if (il.getId() == null) {
-			return;
-		}
-		genericDao.save(il);
+	public Il save(Il il) {
+		return (Il) genericDao.save(il);
 	}
 
 	public void update(Il il) {

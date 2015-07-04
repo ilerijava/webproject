@@ -18,11 +18,11 @@ import com.tutev.personelozluk.entity.Kisi;
 public class KisiServis {
 	GenericDao genericDao = new GenericDao();
 
-	public void save(Kisi kisi) {
+	public Kisi save(Kisi kisi) {
 		if (kisi.getTcKimlikNo() == null) {
-			return;
+			return null;
 		}
-		genericDao.save(kisi);
+		return (Kisi) genericDao.save(kisi);
 	}
 
 	public void update(Kisi kisi) {
@@ -40,8 +40,8 @@ public class KisiServis {
 	public List<Kisi> getAll() {
 		return (List<Kisi>) genericDao.get(Kisi.class);
 	}
-	
-	public Kisi get(Kisi kisi){
+
+	public Kisi get(Kisi kisi) {
 		return (Kisi) genericDao.getById(Kisi.class, kisi.getId());
 	}
 }
