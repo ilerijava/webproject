@@ -24,6 +24,7 @@
 
 	<dependencies>
 
+		<!-- Sample Data Populator -->
 		<dependency>
 			<groupId>org.fluttercode.datafactory</groupId>
 			<artifactId>datafactory</artifactId>
@@ -31,6 +32,12 @@
 			<type>jar</type>
 		</dependency>
 
+		<!-- PrimeFaces Themes -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 
 		<!-- PrimeFaces -->
 		<dependency>
@@ -77,6 +84,7 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -127,13 +135,13 @@
 			<version>1.6.4</version>
 		</dependency>
 
+		<!-- PostgreSQL Database -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 	</dependencies>
-
 
 	<build>
 		<finalName>webproject</finalName>

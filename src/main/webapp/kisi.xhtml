@@ -8,9 +8,25 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Kişi Listesi</title>
+
+	<style type="text/css">
+.ui-datatable-header {
+	height: 33px;
+}
+</style>
 </h:head>
 <h:body>
 	<h:form id="form1">
+
+		<h:panelGrid columns="2" cellpadding="10">
+			<p:outputLabel value="Tema:" />
+			<p:themeSwitcher style="width:165px">
+				<f:selectItem itemLabel="Tema Seç" itemValue="-1" />
+				<f:selectItems value="#{kisiView.temaList}" var="tema"
+					itemLabel="#{tema.displayName}" itemValue="#{tema.name}" />
+			</p:themeSwitcher>
+		</h:panelGrid>
+
 		<p:growl id="msgs" showDetail="true" />
 
 		<p:toolbar>
@@ -23,8 +39,28 @@
 		</p:toolbar>
 
 		<p:dataTable id="dataTable1" var="kisi" value="#{kisiView.kisiList}"
-			style="margin-top:10px">
-			<p:column headerText="Adı">
+			rowIndexVar="rowIndex" resizableColumns="true"
+			style="margin-top:10px" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15">
+
+			<f:facet name="header">
+        		Kayıtlı Kişi Listesi
+ 
+        		<p:commandButton id="toggler" type="button" value="Sütun Seç"
+					style="float:right" icon="ui-icon-calculator" />
+
+				<p:columnToggler datasource="dataTable1" trigger="toggler" />
+
+				<!-- 				<div style="clear: both" /> -->
+
+			</f:facet>
+
+			<p:column headerText="No" style="width:20px;">
+        		#{rowIndex+1}
+    		</p:column>
+
+			<p:column headerText="Adı" sortBy="#{kisi.ad}">
 				<h:outputText value="#{kisi.ad}"></h:outputText>
 			</p:column>
 
@@ -40,41 +76,27 @@
 				<h:outputText value="#{kisi.sifre}"></h:outputText>
 			</p:column>
 
-			<p:column headerText="Adres">
+			<p:column headerText="Adres" style="width:300px;">
 				<h:outputText value="#{kisi.adres.adresTanim}"></h:outputText>
 			</p:column>
 
-			<p:column headerText="İl">
+			<p:column headerText="İl" sortBy="#{kisi.adres.il.tanim}">
 				<h:outputText value="#{kisi.adres.il.tanim}"></h:outputText>
 			</p:column>
 
-			<p:column headerText="İlçe">
+			<p:column headerText="İlçe" sortBy="#{kisi.adres.ilce.tanim}">
 				<h:outputText value="#{kisi.adres.ilce.tanim}"></h:outputText>
 			</p:column>
 
-			<p:column>  
-				<p:commandButton value="Sil" update="confirmDialog1">
-					<p:confirm header="Uyarı"
-						message="Silmek istediğinize emin misiniz?" icon="ui-icon-alert">
-						<f:setPropertyActionListener value="#{kisi}"
-							target="#{kisiView.selectedKisi}" />
-					</p:confirm>
-
+			<p:column style="width:70px;">
+				<p:commandButton value="Sil" update=":form1:silDialog1"
+					oncomplete="PF('silDialog').show()">
+					<f:setPropertyActionListener value="#{kisi}"
+						target="#{kisiView.selectedKisi}" />
 				</p:commandButton>
-
-				<p:confirmDialog id="confirmDialog1" global="true" rendered="true"
-					widgetVar="confirmDialog">
-					<p:commandButton value="Evet" icon="ui-icon-trash"
-						update=":form1:dataTable1" onclick="PF('confirmDialog').hide()"
-						action="#{kisiView.sil}">
-					</p:commandButton>
-
-					<p:commandButton value="Hayır" icon="ui-icon-close"
-						onclick="PF('confirmDialog').hide()"></p:commandButton>
-				</p:confirmDialog>
 			</p:column>
 
-			<p:column>
+			<p:column style="width:100px;">
 				<p:commandButton value="Düzenle" update=":form1:ekleDialog1"
 					oncomplete="PF('ekleDialog').show()">
 					<f:setPropertyActionListener value="#{kisi}"
@@ -84,8 +106,33 @@
 
 		</p:dataTable>
 
+		<p:dialog id="silDialog1" widgetVar="silDialog" header="Uyarı!!!"
+			style="margin-bottom:10px;" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false">
+
+			<h:panelGrid rendered="#{true}">
+				<h:outputLabel
+					value="#{kisiView.selectedKisi.ad} #{kisiView.selectedKisi.soyad} silinecek. Silmek istediğinize emin misiniz?"></h:outputLabel>
+			</h:panelGrid>
+
+			<p:separator />
+
+			<p:commandButton onclick="PF('silDialog').close();"
+				action="#{kisiView.listeYenile}" update=":form1:dataTable1"
+				value="Evet" actionListener="#{kisiView.sil}"></p:commandButton>
+
+			<p:commandButton style="margin-left:10px"
+				action="#{kisiView.listeYenile}" update=":form1:dataTable1"
+				onclick="PF('silDialog').close();" value="Hayır"></p:commandButton>
+		</p:dialog>
+
 		<p:dialog id="ekleDialog1" widgetVar="ekleDialog"
-			header="Kişi Ekle/Düzenle Formu" style="margin-bottom:10px;">
+			header="Kişi Ekle/Düzenle Formu" style="margin-bottom:10px;"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+
+			<p:ajax event="close" update=":form1:dataTable1"
+				listener="#{kisiView.listeYenile}" />
+
 			<h:panelGrid rendered="true" columns="2" cellpadding="8">
 				<h:outputLabel value="Adı : "></h:outputLabel>
 				<p:inputText label="Adı" value="#{kisiView.selectedKisi.ad}"></p:inputText>
@@ -107,7 +154,7 @@
 				<h:outputLabel value="İl : "></h:outputLabel>
 				<p:selectOneMenu label="İl"
 					value="#{kisiView.selectedKisi.adres.il.id}" style="width:150px">
-					<p:ajax listener="#{kisiView.ilChange}" update="ilceSelect" />
+					<p:ajax listener="#{kisiView.ilceGetirByIl}" update="ilceSelect" />
 					<f:selectItem itemLabel="İl Seçiniz" itemValue="-1"
 						noSelectionOption="true" />
 					<f:selectItems value="#{kisiView.ilList}" var="il"
@@ -129,11 +176,15 @@
 			<p:commandButton onclick="PF('ekleDialog').close();"
 				icon="ui-icon-check" action="#{kisiView.listeYenile}"
 				update=":form1:dataTable1" value="Kaydet"
-				actionListener="#{kisiView.kaydet}"></p:commandButton>
+				actionListener="#{kisiView.kaydet}">
+			</p:commandButton>
 
 			<p:commandButton style="margin-left:10px"
-				onclick="PF('ekleDialog').close();" value="İptal"></p:commandButton>
+				action="#{kisiView.listeYenile}" update=":form1:dataTable1"
+				onclick="PF('ekleDialog').close();" value="İptal">
+			</p:commandButton>
 		</p:dialog>
+
 	</h:form>
 </h:body>
 </html>

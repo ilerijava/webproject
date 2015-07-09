@@ -29,7 +29,7 @@ public class Kisi implements Serializable {
 	String ad;
 	String soyad;
 	String tcKimlikNo;
-	private String sifre;
+	String sifre;
 	Adres adres = new Adres();
 
 	@Id
@@ -71,7 +71,7 @@ public class Kisi implements Serializable {
 		this.tcKimlikNo = tcKimlikNo;
 	}
 
-	@Column(name = "KISI_SIFRE", unique = true)
+	@Column(name = "KISI_SIFRE")
 	public String getSifre() {
 		return sifre;
 	}

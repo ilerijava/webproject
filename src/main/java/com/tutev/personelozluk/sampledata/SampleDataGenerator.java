@@ -26,10 +26,11 @@ public class SampleDataGenerator {
 	static ArrayList<Ilce> ilceList = new ArrayList<Ilce>();
 
 	public static void main(String[] args) {
-		//adresList.addAll(adresServis.getAll());
-		 generatorIller();
-		 generatorIlceler();
-		 generatorAdresler();
+		adresList.addAll(adresServis.getAll());
+		//ilList.addAll(ilServis.getAll());
+		//generatorIller();
+		//generatorIlceler();
+		//generatorAdresler();
 		generatorKisiler();
 	}
 
@@ -52,8 +53,9 @@ public class SampleDataGenerator {
 		for (int i = 0; i < 10; i++) {
 			Adres adres = new Adres();
 			adres.setAdresTanim(df.getAddress());
-			adres.setIl(ilList.get(i));
-			adres.setIlce(ilceList.get(i));
+			Il il = ilList.get(i);
+			adres.setIl(il);
+			adres.setIlce(ilceServis.getAllById(il.getId().toString()).get(0));
 			adresList.add(adresServis.save(adres));
 		}
 	}

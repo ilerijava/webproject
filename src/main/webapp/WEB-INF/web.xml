@@ -4,6 +4,7 @@
 
 <web-app>
 	<display-name>İleri Java Web Uygulaması</display-name>
+
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
