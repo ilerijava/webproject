@@ -44,13 +44,13 @@ public class LoginBean {
 		FacesMessage message = null;
 		if (kisi != null) {
 			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tebrikler",
-					"Kullanıcı girişi başarılı");
+					"KullanÄ±cÄ± giriÅŸi baÅŸarÄ±lÄ±");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			FacesContext.getCurrentInstance().
 			  getExternalContext().redirect("kisi.xhtml");
 		} else {
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hata",
-					"Kullanıcı girişi başarısız");
+					"KullanÄ±cÄ± giriÅŸi baÅŸarÄ±sÄ±z");
 			FacesContext.getCurrentInstance().
 			  getExternalContext().redirect("login.xhtml");
 

@@ -1,0 +1,30 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+
+		<h:panelGrid cellpadding="10"
+			style="float:left; font-size:24px;">
+			<p:outputLabel value="#{msg['header.title']}" />
+		</h:panelGrid>
+
+		<h:panelGrid columns="2" cellpadding="10" style="float:right;">
+			<p:outputLabel value="Tema:" />
+			<p:themeSwitcher style="width:165px">
+				<f:selectItem itemLabel="Tema Seç" itemValue="-1" />
+				<f:selectItems value="#{kisiView.temaList}" var="tema"
+					itemLabel="#{tema.displayName}" itemValue="#{tema.name}" />
+			</p:themeSwitcher>
+		</h:panelGrid>
+
+
+
+
+
+</ui:composition>

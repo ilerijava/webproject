@@ -4,11 +4,11 @@ import org.fluttercode.datafactory.NameDataValues;
 
 public class KisiAdlariGenerator implements NameDataValues {
 
-	String[] adlar = { "Ali", "Veli", "Kamil", "Hasan", "Hüseyin", "Cengiz",
-			"Hakký", "Ahmet", "Mehmet", "Rasim" };
+	String[] adlar = { "Ali", "Veli", "Kamil", "Hasan", "HÃ¼seyin", "Cengiz",
+			"HakkÄ±", "Ahmet", "Mehmet", "Rasim" };
 
-	String[] soyadlar = { "Çelik", "Yýlmaz", "Demir", "Akar", "Serin", "Eser",
-			"Yeter", "Bulut", "Yaðmur", "Güler" };
+	String[] soyadlar = { "Ã‡elik", "YÄ±lmaz", "Demir", "Akar", "Serin", "Eser",
+			"Yeter", "Bulut", "YaÄŸmur", "GÃ¼ler" };
 
 	public String[] getFirstNames() {
 		return adlar;

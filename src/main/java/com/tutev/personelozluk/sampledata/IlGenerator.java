@@ -5,14 +5,14 @@ import org.fluttercode.datafactory.impl.DefaultAddressDataValues;
 
 public class IlGenerator implements AddressDataValues {
 
-	String[] ilAdlari = { "Afyon", "Ankara", "Antalya", "Ýstanbul", "Ýzmir",
-			"Giresun", "Sivas", "Erzincan", "Yozgat", "Kütahya" };
+	String[] ilAdlari = { "Afyon", "Ankara", "Antalya", "Ä°stanbul", "Ä°zmir",
+			"Giresun", "Sivas", "Erzincan", "Yozgat", "KÃ¼tahya" };
 	
 	String[] ilPlakalari = { "03", "06", "07", "34", "35",
 			"28", "58", "24", "66", "43" };
 	
-	String[] ilTanimlari = { "Afyon", "Ankara", "Antalya", "Ýstanbul", "Ýzmir",
-			"Giresun", "Sivas", "Erzincan", "Yozgat", "Kütahya" };
+	String[] ilTanimlari = { "Afyon", "Ankara", "Antalya", "Ä°stanbul", "Ä°zmir",
+			"Giresun", "Sivas", "Erzincan", "Yozgat", "KÃ¼tahya" };
 
 	public String[] getAddressSuffixes() {
 		return ilPlakalari;

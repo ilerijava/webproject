@@ -4,11 +4,11 @@ import org.fluttercode.datafactory.AddressDataValues;
 
 public class IlceGenerator implements AddressDataValues {
 
-	String[] ilceAdlari = { "Sandıklı", "Kozan", "Beypazarı", "Üsküdar",
-			"Merkezefendi", "Almus", "Kemah", "Zara", "Sarıkaya", "Meram" };
+	String[] ilceAdlari = { "SandÄ±klÄ±", "Kozan", "BeypazarÄ±", "ÃœskÃ¼dar",
+			"Merkezefendi", "Almus", "Kemah", "Zara", "SarÄ±kaya", "Meram" };
 
-	String[] ilceKodlari = { "Sandıklı", "Kozan", "Beypazarı", "Üsküdar",
-			"Merkezefendi", "Almus", "Kemah", "Zara", "Sarıkaya", "Meram" };
+	String[] ilceKodlari = { "SandÄ±klÄ±", "Kozan", "BeypazarÄ±", "ÃœskÃ¼dar",
+			"Merkezefendi", "Almus", "Kemah", "Zara", "SarÄ±kaya", "Meram" };
 
 	public String[] getAddressSuffixes() {
 		return ilceKodlari;
