@@ -10,9 +10,7 @@
 
 	<ui:define name="content">
 
-		
 		<h:body>
-
 
 			<h:form id="form1">
 
@@ -22,7 +20,7 @@
 					<f:facet name="left">
 						<p:commandButton value="Kişi Ekle" icon="ui-icon-document"
 							action="#{kisiView.bosKisiEkle}"
-							update="mainForm:form1:ekleDialog1"
+							update=":mainForm:form1:ekleDialog1"
 							oncomplete="PF('ekleDialog').show()">
 						</p:commandButton>
 					</f:facet>
@@ -58,12 +56,8 @@
 						<h:outputText value="#{kisi.soyad}"></h:outputText>
 					</p:column>
 
-					<p:column headerText="TC Kimlik No">
+					<p:column headerText="TCK No">
 						<h:outputText value="#{kisi.tcKimlikNo}"></h:outputText>
-					</p:column>
-
-					<p:column headerText="Şifre">
-						<h:outputText value="#{kisi.sifre}"></h:outputText>
 					</p:column>
 
 					<p:column headerText="Adres" style="width:300px;">
@@ -79,7 +73,7 @@
 					</p:column>
 
 					<p:column style="width:70px;">
-						<p:commandButton value="Sil" update="mainForm:form1:silDialog1"
+						<p:commandButton value="Sil" update=":mainForm:form1:silDialog1"
 							oncomplete="PF('silDialog').show()">
 							<f:setPropertyActionListener value="#{kisi}"
 								target="#{kisiView.selectedKisi}" />
@@ -88,7 +82,7 @@
 
 					<p:column style="width:100px;">
 						<p:commandButton value="Düzenle"
-							update="mainForm:form1:ekleDialog1"
+							update=":mainForm:form1:ekleDialog1"
 							oncomplete="PF('ekleDialog').show()">
 							<f:setPropertyActionListener value="#{kisi}"
 								target="#{kisiView.selectedKisi}" />
@@ -101,21 +95,21 @@
 					style="margin-bottom:10px;" modal="true" showEffect="fade"
 					hideEffect="fade" resizable="false" appendTo="@(body)">
 
-					<h:panelGrid rendered="#{true}">
+					<h:panelGrid rendered="true">
 						<h:outputLabel
 							value="#{kisiView.selectedKisi.ad} #{kisiView.selectedKisi.soyad} silinecek. Silmek istediğinize emin misiniz?"></h:outputLabel>
 					</h:panelGrid>
 
 					<p:separator />
 
-					<p:commandButton onclick="PF('silDialog').hide();"
+					<p:commandButton process="@this" onclick="PF('silDialog').hide();"
 						action="#{kisiView.listeYenile}"
-						update="mainForm:form1:dataTable1" value="Evet"
+						update=":mainForm:form1:dataTable1" value="Evet"
 						actionListener="#{kisiView.sil}"></p:commandButton>
 
-					<p:commandButton style="margin-left:10px"
+					<p:commandButton process="@this" style="margin-left:10px"
 						action="#{kisiView.listeYenile}"
-						update="mainForm:form1:dataTable1"
+						update=":mainForm:form1:dataTable1"
 						onclick="PF('silDialog').hide();" value="Hayır"></p:commandButton>
 				</p:dialog>
 
@@ -124,7 +118,7 @@
 					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
 					appendTo="@(body)">
 
-					<p:ajax event="close" update="mainForm:form1:dataTable1"
+					<p:ajax event="close" update=":mainForm:form1:dataTable1"
 						listener="#{kisiView.listeYenile}" />
 
 					<h:panelGrid rendered="true" columns="2" cellpadding="8">
@@ -137,9 +131,6 @@
 						<h:outputLabel value="TC Kimlik No : "></h:outputLabel>
 						<p:inputText label="TC Kimlik No"
 							value="#{kisiView.selectedKisi.tcKimlikNo}"></p:inputText>
-
-						<h:outputLabel value="Şifre : "></h:outputLabel>
-						<p:inputText label="Şifre" value="#{kisiView.selectedKisi.sifre}"></p:inputText>
 
 						<h:outputLabel value="Adres : "></h:outputLabel>
 						<p:inputText label="Adres"
@@ -168,15 +159,17 @@
 
 					<p:separator />
 
-					<p:commandButton onclick="PF('ekleDialog').hide();"
-						icon="ui-icon-check" action="#{kisiView.listeYenile}"
-						update="mainForm:form1:dataTable1" value="Kaydet"
+					<p:commandButton partialSubmit="true"
+						process="@this,mainForm:form1:ekleDialog1"
+						onclick="PF('ekleDialog').hide();" icon="ui-icon-check"
+						action="#{kisiView.listeYenile}"
+						update=":mainForm:form1:dataTable1" value="Kaydet"
 						actionListener="#{kisiView.kaydet}">
 					</p:commandButton>
 
-					<p:commandButton style="margin-left:10px"
+					<p:commandButton process="@this" style="margin-left:10px"
 						action="#{kisiView.listeYenile}"
-						update="mainForm:form1:dataTable1"
+						update=":mainForm:form1:dataTable1"
 						onclick="PF('ekleDialog').hide();" value="İptal">
 					</p:commandButton>
 				</p:dialog>

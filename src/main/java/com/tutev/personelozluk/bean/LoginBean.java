@@ -1,62 +1,64 @@
 package com.tutev.personelozluk.bean;
 
+import java.io.Serializable;
 
-
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
-import com.tutev.personelozluk.entity.Kisi;
-import com.tutev.personelozluk.service.LoginServis;
+import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 
-@ManagedBean(name = "loginBean")
-@ViewScoped
-public class LoginBean {
+@Controller("loginView")
+@Scope("session")
+public class LoginBean implements Serializable {
 
-	private String kullaniciAdi;
+	private static final long serialVersionUID = -1246714304296999364L;
 
-	private String sifre;
-
-	private LoginServis loginServis = new LoginServis();
-
-	public String getKullaniciAdi() {
-		return kullaniciAdi;
+	@PostConstruct
+	public void init() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
+		String abc = request.getQueryString();
 	}
 
-	public void setKullaniciAdi(String kullaniciAdi) {
-		this.kullaniciAdi = kullaniciAdi;
-	}
+	@SuppressWarnings("finally")
+	public String doLogin() {
+		try {
+			ExternalContext context = FacesContext.getCurrentInstance()
+					.getExternalContext();
+			RequestDispatcher dispatcher = ((ServletRequest) context
+					.getRequest())
+					.getRequestDispatcher("/j_spring_security_check");
 
-	public String getSifre() {
-		return sifre;
-	}
-
-	public void setSifre(String sifre) {
-		this.sifre = sifre;
-	}
-
-	public void login(ActionEvent event) throws Exception {
-
-		Kisi kisi = loginServis.login(kullaniciAdi, sifre);
-
-		FacesMessage message = null;
-		if (kisi != null) {
-			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Tebrikler",
-					"Kullanıcı girişi başarılı");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-			FacesContext.getCurrentInstance().
-			  getExternalContext().redirect("kisi.xhtml");
-		} else {
-			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Hata",
-					"Kullanıcı girişi başarısız");
-			FacesContext.getCurrentInstance().
-			  getExternalContext().redirect("login.xhtml");
-
+			dispatcher.forward((ServletRequest) context.getRequest(),
+					(ServletResponse) context.getResponse());
+			FacesContext.getCurrentInstance().responseComplete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			return null;
 		}
-		
-
 	}
 
+	public void authorizedUserControl() {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+
+		if (!authentication.getPrincipal().toString().equals("anonymousUser")) {
+			NavigationHandler nh = FacesContext.getCurrentInstance()
+					.getApplication().getNavigationHandler();
+			nh.handleNavigation(FacesContext.getCurrentInstance(), null,
+					"/pages/index.xhtml?faces-redirect=true");
+//			System.out.println(SecurityContextHolder.getContext()
+//					.getAuthentication().getPrincipal());
+		}
+	}
 }

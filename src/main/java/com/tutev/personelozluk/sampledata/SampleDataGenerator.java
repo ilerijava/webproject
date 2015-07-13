@@ -26,12 +26,15 @@ public class SampleDataGenerator {
 	static ArrayList<Ilce> ilceList = new ArrayList<Ilce>();
 
 	public static void main(String[] args) {
+//		generatorIller();
+		
+		ilList.addAll(ilServis.getAll());
+//		generatorIlceler();
+		
+//		generatorAdresler();
+		
 		adresList.addAll(adresServis.getAll());
-		//ilList.addAll(ilServis.getAll());
-		//generatorIller();
-		//generatorIlceler();
-		//generatorAdresler();
-		generatorKisiler();
+//		generatorKisiler();
 	}
 
 	public static void generatorKisiler() {
@@ -41,7 +44,6 @@ public class SampleDataGenerator {
 			Kisi kisi = new Kisi();
 			kisi.setAd(df.getFirstName());
 			kisi.setAdres(adresList.get(i));
-			kisi.setSifre(df.getRandomChars(4));
 			kisi.setSoyad(df.getLastName());
 			kisi.setTcKimlikNo(df.getNumberText(11));
 			kisiList.add(kisiServis.save(kisi));

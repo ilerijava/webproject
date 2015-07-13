@@ -19,6 +19,7 @@ import com.tutev.personelozluk.service.IlServis;
 import com.tutev.personelozluk.service.IlceServis;
 import com.tutev.personelozluk.service.KisiServis;
 import com.tutev.personelozluk.service.TemaServis;
+import com.tutev.personelozluk.util.MessageUtil;
 
 @ManagedBean(name = "kisiView")
 @ViewScoped
@@ -132,8 +133,8 @@ public class KisiBean implements Serializable {
 		ilceList = ilceServis.getAllById(selectedKisi.getAdres().getIl()
 				.getId().toString());
 	}
-	
-    public void setTemaServis(TemaServis servis) {
-        this.temaServis = servis;
-    }
+
+	public void setTemaServis(TemaServis servis) {
+		this.temaServis = servis;
+	}
 }

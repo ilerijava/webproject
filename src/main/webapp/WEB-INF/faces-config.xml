@@ -6,7 +6,11 @@
 	version="2.0">
 
 	<application>
-		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+<!-- 		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver> -->
+		
+		<el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
 
 		<locale-config>
 			<default-locale>en</default-locale>
@@ -17,5 +21,17 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+
+	<system-event-listener>
+		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class>
+		<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
+		<source-class>javax.faces.component.UIViewRoot</source-class>
+	</system-event-listener>
+
+	<system-event-listener>
+		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class>
+		<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
+		<source-class>javax.faces.component.UIViewRoot</source-class>
+	</system-event-listener>
 
 </faces-config>

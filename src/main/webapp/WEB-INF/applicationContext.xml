@@ -1,9 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd  http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
+	<bean id="annotationBeanPostProcessor"
+		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
+	<context:component-scan base-package="com.tutev.personelozluk" />
+
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="com.tutev.personelozluk.util.ViewScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="DataSource" class="org.postgresql.jdbc3.Jdbc3PoolingDataSource">
+		<property name="serverName" value="localhost" />
+		<property name="portNumber" value="5432" />
+		<property name="databaseName" value="testdb" />
+		<property name="user" value="postgres" />
+		<property name="password" value="postgres" />
+		<property name="initialConnections" value="3" />
+		<property name="maxConnections" value="50" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="DataSource" />
+		<property name="packagesToScan" value="com.tutev.personelozluk" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="hibernate.max_fetch_depth">1</prop>
+			</props>
+		</property>
+	</bean>
+	<tx:annotation-driven transaction-manager="txManager" />
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

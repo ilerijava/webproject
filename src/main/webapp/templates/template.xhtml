@@ -27,7 +27,7 @@
 				<ui:include src="header.xhtml" />
 			</p:layoutUnit>
 
-			<p:layoutUnit position="west" id="west" resizable="false" collapsible="true"
+			<p:layoutUnit position="west" id="west" visible="false" resizable="false" collapsible="true"
 				header="#{msg['menu.title']}" style="height:580px;overflow:hidden;"
 				size="225">
 				<ui:include src="menu.xhtml" />
@@ -35,8 +35,8 @@
 
 			<p:layoutUnit styleClass="layoutUnitCenter" position="center">
 				<h:form id="mainForm">
-					<p:messages autoUpdate="true" id="msgs" showDetail="true"
-						showSummary="true" />
+<!-- 					<p:messages autoUpdate="true" id="msgs" showDetail="true" -->
+<!-- 						showSummary="true" /> -->
 					<ui:insert name="content" />
 				</h:form>
 			</p:layoutUnit>

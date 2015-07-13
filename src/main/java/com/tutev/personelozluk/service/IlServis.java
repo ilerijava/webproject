@@ -11,10 +11,7 @@ import java.util.List;
 import com.tutev.personelozluk.dao.GenericDao;
 import com.tutev.personelozluk.entity.Il;
 
-/**
- *
- * @author Tutev
- */
+@SuppressWarnings("unchecked")
 public class IlServis {
 	GenericDao genericDao = new GenericDao();
 
@@ -33,7 +30,7 @@ public class IlServis {
 		genericDao.delete(il);
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public List<Il> getAll() {
 		return (List<Il>) genericDao.get(Il.class);
 	}

@@ -1,4 +1,4 @@
-package com.tutev.personelozluk.bean;
+package com.tutev.personelozluk.util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;

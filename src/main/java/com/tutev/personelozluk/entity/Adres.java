@@ -16,15 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- *
- * @author Tutev
- */
 @Entity
 @Table(name = "ADRES")
 public class Adres implements Serializable{
 
-    Long id;
+	private static final long serialVersionUID = -4234253797464481734L;
+	Long id;
     String adresTanim;
     Il il = new Il(); 
     Ilce ilce = new Ilce();

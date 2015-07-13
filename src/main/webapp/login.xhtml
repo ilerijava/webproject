@@ -1,37 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Login sayfası</title>
 
+	<title>Personel Özlük Projesi</title>
+	<f:metadata>
+		<f:event type="javax.faces.event.PreRenderViewEvent"
+			listener="#{loginView.authorizedUserControl}" />
+	</f:metadata>
 </h:head>
 <h:body>
+	<section class="container">
+		<div class="login">
+			<h:form prependId="false">
+				<h:panelGrid columns="2" cellpadding="8">
+					<h:outputLabel value="Kullanıcı Adı : " />
+					<p:inputText id="j_username"></p:inputText>
 
-	<h:form>
-		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+					<h:outputLabel value="Şifre : " />
+					<p:password id="j_password"></p:password>
 
-		<h:panelGrid columns="2" cellpadding="5">
-			<h:outputLabel for="kullaniciAdi" value="Kullanıcı Adı : " />
-			<p:inputText id="kullaniciAdi"
-				value="#{loginBean.kullaniciAdi}"
-				required="true" label="kullaniciAdi" />
+					<p:commandButton id="giris" value="Giriş"
+						action="#{loginView.doLogin}" ajax="false" icon="ui-icon-document" />
 
-			<h:outputLabel for="sifre" value="Şifre : " />
-			<p:password id="sifre"
-				value="#{loginBean.sifre}"
-				required="true" label="sifre" />
-
-			<f:facet name="footer">
-				<p:commandButton value="Login" update="growl"
-					actionListener="#{loginBean.login}" />
-			</f:facet>
-		</h:panelGrid>
-
-	</h:form>
+					<h:outputLabel style="color:red;"
+						value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+						rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</section>
 </h:body>
 </html>

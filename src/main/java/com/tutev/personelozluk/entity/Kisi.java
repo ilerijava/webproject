@@ -17,10 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- *
- * @author Tutev
- */
+
 @Entity
 @Table(name = "KISI")
 public class Kisi implements Serializable {
@@ -29,7 +26,7 @@ public class Kisi implements Serializable {
 	String ad;
 	String soyad;
 	String tcKimlikNo;
-	String sifre;
+
 	Adres adres = new Adres();
 
 	@Id
@@ -69,15 +66,6 @@ public class Kisi implements Serializable {
 
 	public void setTcKimlikNo(String tcKimlikNo) {
 		this.tcKimlikNo = tcKimlikNo;
-	}
-
-	@Column(name = "KISI_SIFRE")
-	public String getSifre() {
-		return sifre;
-	}
-
-	public void setSifre(String sifre) {
-		this.sifre = sifre;
 	}
 
 	@ManyToOne(optional = true)

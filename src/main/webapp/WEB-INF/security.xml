@@ -1,0 +1,38 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                        
+    <http use-expressions="true">
+    	<intercept-url pattern="/pages/kisi.xhtml" access="permitAll" />
+<!--         <intercept-url pattern="/pages/**" access="hasRole('ROLE_ADMIN')"/> -->
+        <form-login 
+        login-processing-url="/j_spring_security_check" 
+        login-page="/login.xhtml?faces-redirect=true"
+        default-target-url="/index.xhtml" 
+        authentication-failure-url="/login.xhtml?faces-redirect=true?error"/>
+        <logout invalidate-session="true" logout-success-url="/login.xhtml?faces-redirect=true?logout"/>
+    </http>
+	
+	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+	    <beans:property name="userDetailsService" ref="userDetailsService" ></beans:property>
+	    
+	</beans:bean>
+	
+	<beans:bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+	    <beans:property name="providers">
+	        <beans:list>
+	            <beans:ref local="daoAuthenticationProvider"/>
+	        </beans:list>
+	    </beans:property>
+	</beans:bean>
+	
+	<authentication-manager>
+	    <authentication-provider user-service-ref="userDetailsService">
+	        <password-encoder hash="md5"></password-encoder>
+	    </authentication-provider>
+	</authentication-manager>
+</beans:beans>
