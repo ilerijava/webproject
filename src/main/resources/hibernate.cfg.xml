@@ -8,22 +8,21 @@
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
 
-
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.show_sql">true</property>
 
-		<mapping class="com.tutev.personelozluk.entity.Adres" />
-		<mapping class="com.tutev.personelozluk.entity.Firma" />
-		<mapping class="com.tutev.personelozluk.entity.Il" />
-		<mapping class="com.tutev.personelozluk.entity.Ilce" />
-		<mapping class="com.tutev.personelozluk.entity.Kisi" />
-		<mapping class="com.tutev.personelozluk.entity.Personel" />
-		<mapping class="com.tutev.personelozluk.entity.Kullanici" />
-		<mapping class="com.tutev.personelozluk.entity.KullaniciYetkiRol" />
-		<mapping class="com.tutev.personelozluk.entity.Rol" />
-		<mapping class="com.tutev.personelozluk.entity.RolYetki" />
-		<mapping class="com.tutev.personelozluk.entity.Yetki" />
+		<mapping class="com.tutev.entity.Adres" />
+		<mapping class="com.tutev.entity.Firma" />
+		<mapping class="com.tutev.entity.Il" />
+		<mapping class="com.tutev.entity.Ilce" />
+		<mapping class="com.tutev.entity.Kisi" />
+		<mapping class="com.tutev.entity.Personel" />
+		<mapping class="com.tutev.entity.Kullanici" />
+		<mapping class="com.tutev.entity.KullaniciYetkiRol" />
+		<mapping class="com.tutev.entity.Rol" />
+		<mapping class="com.tutev.entity.RolYetki" />
+		<mapping class="com.tutev.entity.Yetki" />
 
 	</session-factory>
 </hibernate-configuration>

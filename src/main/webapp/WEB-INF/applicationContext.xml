@@ -17,13 +17,13 @@
 	<bean id="annotationBeanPostProcessor"
 		class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
-	<context:component-scan base-package="com.tutev.personelozluk" />
+	<context:component-scan base-package="com.tutev" />
 
 	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
 		<property name="scopes">
 			<map>
 				<entry key="view">
-					<bean class="com.tutev.personelozluk.util.ViewScope" />
+					<bean class="com.tutev.util.ViewScope" />
 				</entry>
 			</map>
 		</property>
@@ -54,7 +54,9 @@
 			</props>
 		</property>
 	</bean>
+	
 	<tx:annotation-driven transaction-manager="txManager" />
+	
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

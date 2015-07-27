@@ -7,7 +7,7 @@
 	<display-name>Personel Özlük Projesi</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>/pages/kisi.xhtml</welcome-file>
+		<welcome-file>/pages/unsecure/login.xhtml</welcome-file>
 	</welcome-file-list>
 		
 	<context-param>
@@ -47,8 +47,8 @@
             org.springframework.web.context.request.RequestContextListener
         </listener-class>
       </listener>
-      
-     <filter>
+
+	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -72,14 +72,14 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-<!-- 	<filter> -->
-<!-- 		<filter-name>encoding-filter</filter-name> -->
-<!-- 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> -->
-<!-- 		<init-param> -->
-<!-- 			<param-name>encoding</param-name> -->
-<!-- 			<param-value>UTF-8</param-value> -->
-<!-- 		</init-param> -->
-<!-- 	</filter> -->
+	<filter>
+		<filter-name>encoding-filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

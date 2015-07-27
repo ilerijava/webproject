@@ -1,0 +1,189 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:body>
+
+			<h:form id="form1">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Kişi Ekle" icon="ui-icon-document"
+							action="#{kisiView.bosKisiEkle}"
+							update=":mainForm:form1:msgs,:mainForm:form1:ekleDialog1"
+							oncomplete="PF('ekleDialog').show()">
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+
+				<p:dataTable id="dataTable1" var="kisi" value="#{kisiView.kisiList}"
+					rowIndexVar="rowIndex" resizableColumns="true"
+					style="margin-top:10px" rows="5" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+
+					<f:facet name="header">
+        		Kayıtlı Kişi Listesi
+ 
+        		<p:commandButton id="toggler" type="button" value="Sütun Seç"
+							style="float:right" icon="ui-icon-calculator" />
+
+						<p:columnToggler datasource="dataTable1" trigger="toggler" />
+
+						<div style="clear: both" />
+
+					</f:facet>
+
+					<p:column headerText="No" style="width:20px;">
+        		#{rowIndex+1}
+    		</p:column>
+
+					<p:column headerText="Adı" sortBy="#{kisi.ad}">
+						<h:outputText value="#{kisi.ad}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Soyadı">
+						<h:outputText value="#{kisi.soyad}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="TCK No">
+						<h:outputText value="#{kisi.tcKimlikNo}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Adres" style="width:300px;">
+						<h:outputText value="#{kisi.adres.adresTanim}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="İl" sortBy="#{kisi.adres.il.tanim}">
+						<h:outputText value="#{kisi.adres.il.tanim}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="İlçe" sortBy="#{kisi.adres.ilce.tanim}">
+						<h:outputText value="#{kisi.adres.ilce.tanim}"></h:outputText>
+					</p:column>
+
+					<p:column style="width:70px;">
+						<p:commandButton value="Sil" update=":mainForm:form1:silDialog1"
+							oncomplete="PF('silDialog').show()">
+							<f:setPropertyActionListener value="#{kisi}"
+								target="#{kisiView.selectedKisi}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column style="width:100px;">
+						<p:commandButton value="Düzenle"
+							update=":mainForm:form1:ekleDialog1"
+							oncomplete="PF('ekleDialog').show()">
+							<f:setPropertyActionListener value="#{kisi}"
+								target="#{kisiView.selectedKisi}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+				<p:dialog id="silDialog1" widgetVar="silDialog" header="Uyarı!!!"
+					style="margin-bottom:10px;" modal="true" showEffect="fade"
+					hideEffect="fade" resizable="false" appendTo="@(body)">
+
+					<h:panelGrid rendered="true">
+						<h:outputLabel
+							value="#{kisiView.selectedKisi.ad} #{kisiView.selectedKisi.soyad} silinecek. Silmek istediğinize emin misiniz?"></h:outputLabel>
+					</h:panelGrid>
+
+					<p:separator />
+
+					<p:commandButton process="@this" onclick="PF('silDialog').hide();"
+						action="#{kisiView.listeYenile}"
+						update=":mainForm:form1:msgs,:mainForm:form1:dataTable1"
+						value="Evet" actionListener="#{kisiView.sil}"></p:commandButton>
+
+					<p:commandButton process="@this" style="margin-left:10px"
+						action="#{kisiView.listeYenile}"
+						update=":mainForm:form1:dataTable1"
+						onclick="PF('silDialog').hide();" value="Hayır"></p:commandButton>
+				</p:dialog>
+
+				<p:dialog id="ekleDialog1" widgetVar="ekleDialog"
+					header="Kişi Ekle/Düzenle Formu" style="margin-bottom:10px;"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					appendTo="@(body)">
+
+					<p:ajax event="close" update=":mainForm:form1:dataTable1"
+						listener="#{kisiView.listeYenile}" />
+
+					<h:panelGrid rendered="true" columns="2" cellpadding="8">
+						<h:outputLabel value="Adı : "></h:outputLabel>
+						<p:inputText label="Adı" value="#{kisiView.selectedKisi.ad}"></p:inputText>
+
+						<h:outputLabel value="Soyadı : "></h:outputLabel>
+						<p:inputText label="Soyadı" value="#{kisiView.selectedKisi.soyad}"></p:inputText>
+
+						<h:outputLabel value="TC Kimlik No : "></h:outputLabel>
+						<p:inputText label="TC Kimlik No"
+							value="#{kisiView.selectedKisi.tcKimlikNo}"></p:inputText>
+
+						<h:outputLabel value="Adres : "></h:outputLabel>
+						<p:inputText label="Adres"
+							value="#{kisiView.selectedKisi.adres.adresTanim}"></p:inputText>
+
+						<h:outputLabel value="İl : "></h:outputLabel>
+						<p:selectOneMenu  label="İl" id="ilSelect"
+							value="#{kisiView.selectedKisi.adres.il.id}" style="width:150px">
+
+							<p:ajax process="ilSelect" partialSubmit="true" immediate="true"
+								 listener="#{kisiView.ilceGetirByIl}"
+								event="change" update="ilceSelect" />
+
+							<f:selectItem itemLabel="İl Seçiniz" itemValue="-1"
+								noSelectionOption="true" />
+							<f:selectItems value="#{kisiView.ilList}" var="il"
+								itemLabel="#{il.tanim}" itemValue="#{il.id}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="İlçe : "></h:outputLabel>
+						<p:selectOneMenu label="İlçe" id="ilceSelect"
+							value="#{kisiView.selectedKisi.adres.ilce.id}"
+							style="width:150px">
+							<f:selectItem itemLabel="İlçe Seçiniz" itemValue="-1"
+								noSelectionOption="true" />
+							<f:selectItems value="#{kisiView.ilceList}" var="ilce"
+								itemLabel="#{ilce.tanim}" itemValue="#{ilce.id}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+
+					<p:separator />
+
+					<p:commandButton partialSubmit="true"
+						process="@this,mainForm:form1:ekleDialog1"
+						onclick="PF('ekleDialog').hide();" icon="ui-icon-check"
+						action="#{kisiView.listeYenile}"
+						update=":mainForm:form1:msgs,:mainForm:form1:dataTable1"
+						value="Kaydet" actionListener="#{kisiView.kaydet}">
+					</p:commandButton>
+
+					<p:commandButton style="margin-left:10px"
+						onclick="PF('ekleDialog').hide();" value="İptal">
+					</p:commandButton>
+				</p:dialog>
+
+			</h:form>
+		</h:body>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+
+

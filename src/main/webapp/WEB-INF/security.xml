@@ -7,14 +7,13 @@
                     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
                         
     <http use-expressions="true">
-    	<intercept-url pattern="/pages/kisi.xhtml" access="permitAll" />
-<!--         <intercept-url pattern="/pages/**" access="hasRole('ROLE_ADMIN')"/> -->
+    	<intercept-url pattern="/pages/unsecure/login.xhtml" access="permitAll" />
         <form-login 
         login-processing-url="/j_spring_security_check" 
-        login-page="/login.xhtml?faces-redirect=true"
-        default-target-url="/index.xhtml" 
-        authentication-failure-url="/login.xhtml?faces-redirect=true?error"/>
-        <logout invalidate-session="true" logout-success-url="/login.xhtml?faces-redirect=true?logout"/>
+        login-page="/pages/unsecure/login.xhtml?faces-redirect=true"
+        default-target-url="/pages/secure/index.xhtml" 
+        authentication-failure-url="/pages/unsecure/login.xhtml?faces-redirect=true?error"/>
+        <logout invalidate-session="true" logout-success-url="/pages/unsecure/login.xhtml?faces-redirect=true?logout"/>
     </http>
 	
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
