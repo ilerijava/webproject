@@ -11,26 +11,43 @@
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
 
-		<locale-config>
-			<default-locale>en</default-locale>
-		</locale-config>
+<!-- 		<locale-config> -->
+<!-- 			<default-locale>en</default-locale> -->
+<!-- 		</locale-config> -->
 
-		<resource-bundle>
-			<base-name>messages</base-name>
-			<var>msg</var>
-		</resource-bundle>
+<!-- 		<resource-bundle> -->
+<!-- 			<base-name>messages</base-name> -->
+<!-- 			<var>msg</var> -->
+<!-- 		</resource-bundle> -->
 	</application>
+	
+	    <!-- navigation-rule for login.xhtml -->
+    <navigation-rule>
+        <from-view-id>/pages/unsecure/login.xhtml</from-view-id>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{loginView.login}</from-action>
+            <from-outcome>correct</from-outcome>
+            <to-view-id>/pages/secure/index.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation-case for method login() -->
+        <navigation-case>
+            <from-action>#{loginView.login}</from-action>
+            <from-outcome>incorrect</from-outcome>
+            <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
-	<system-event-listener>
-		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class>
-		<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
-		<source-class>javax.faces.component.UIViewRoot</source-class>
-	</system-event-listener>
+<!-- 	<system-event-listener> -->
+<!-- 		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class> -->
+<!-- 		<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class> -->
+<!-- 		<source-class>javax.faces.component.UIViewRoot</source-class> -->
+<!-- 	</system-event-listener> -->
 
-	<system-event-listener>
-		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class>
-		<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
-		<source-class>javax.faces.component.UIViewRoot</source-class>
-	</system-event-listener>
+<!-- 	<system-event-listener> -->
+<!-- 		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class> -->
+<!-- 		<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class> -->
+<!-- 		<source-class>javax.faces.component.UIViewRoot</source-class> -->
+<!-- 	</system-event-listener> -->
 
 </faces-config>

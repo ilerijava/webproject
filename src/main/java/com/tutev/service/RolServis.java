@@ -20,6 +20,7 @@ import com.tutev.entity.Yetki;
 import com.tutev.util.QueryResult;
 
 @Service("rolService")
+@SuppressWarnings("unchecked")
 public class RolServis {
 
 	@Autowired
@@ -107,7 +108,6 @@ public class RolServis {
 		return (Rol) criteria.uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Rol> getAll() {
 		Criteria criteria = baseServis.getSession().createCriteria(Rol.class);
 		criteria.addOrder(Order.asc("id"));
@@ -127,11 +127,21 @@ public class RolServis {
 	}
 
 	public Kullanici getUserByName(String username) {
-		Object object = genericDao.getById(Kullanici.class, 1L);
+		String[] parameterNames = { "username" };
+		Object[] parameterValues = { username };
+
+		List<Kullanici> list = (List<Kullanici>) genericDao.get(parameterNames,
+				parameterValues, Kullanici.class);
+
+		// Object object = genericDao.getById(Kullanici.class, 1L);
 		Criteria criteria = baseServis.getSession().createCriteria(
 				Kullanici.class);
 		criteria.add(Restrictions.eq("username", username));
-		return (Kullanici) object;
+		if (list.size() > 0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
 	}
 
 	public List<KullaniciYetkiRol> getKullaniciRolByKullaniciId(Long id) {

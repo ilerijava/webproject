@@ -19,6 +19,10 @@
 
 	<context:component-scan base-package="com.tutev" />
 
+	<!-- Use annotation for configuration -->
+	<context:annotation-config />
+	<context:spring-configured />
+
 	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
 		<property name="scopes">
 			<map>
@@ -42,7 +46,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="DataSource" />
-		<property name="packagesToScan" value="com.tutev.personelozluk" />
+		<property name="packagesToScan" value="com.tutev" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -54,9 +58,9 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<tx:annotation-driven transaction-manager="txManager" />
-	
+
 	<bean id="txManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

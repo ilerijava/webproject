@@ -6,6 +6,7 @@
 
 package com.tutev.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.tutev.dao.GenericDao;
@@ -15,7 +16,12 @@ import com.tutev.entity.Adres;
  *
  * @author Tutev
  */
-public class AdresServis {
+public class AdresServis implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6070600959662672452L;
+
 	GenericDao genericDao = new GenericDao();
 
 	public Adres save(Adres adres) {

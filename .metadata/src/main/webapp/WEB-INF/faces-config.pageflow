@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14366114998750" configfile="/webproject/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14366114998750" configfile="/webproject/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/unsecure/login.xhtml" x="122" y="178" id="pf14384297442770" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" outlinks="pf14384297442771 pf14384600211360" inlinks="pf14384297442771" path="/pages/unsecure/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/index.xhtml" x="122" y="562" id="pf14384297442773" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="pages/secure/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/secure/index.xhtml" x="338" y="178" id="pf14384600211381" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14384600211360" path="/pages/secure/index.xhtml"/>
+  <links id="pf14384600211360" target="pf14384600211381" source="pf14384297442770" outcome="correct" fromaction="#{loginView.login}"/>
+  <links id="pf14384297442771" target="pf14384297442770" source="pf14384297442770" outcome="incorrect" fromaction="#{loginView.login}">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>

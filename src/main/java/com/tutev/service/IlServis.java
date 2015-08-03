@@ -6,13 +6,20 @@
 
 package com.tutev.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.tutev.dao.GenericDao;
 import com.tutev.entity.Il;
 
 @SuppressWarnings("unchecked")
-public class IlServis {
+public class IlServis  implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7808345258454958968L;
+	
 	GenericDao genericDao = new GenericDao();
 
 	public Il save(Il il) {

@@ -2,63 +2,75 @@ package com.tutev.bean;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 
-@Controller("loginView")
-@Scope("session")
+import com.tutev.util.MessageUtil;
+
+@ManagedBean(name = "loginView")
+@ViewScoped
 public class LoginBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6196800544465885933L;
 
-	private static final long serialVersionUID = -1246714304296999364L;
+	private String userName = null;
+	private String password = null;
 
-	@PostConstruct
-	public void init() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
-		String abc = request.getQueryString();
-	}
+	@ManagedProperty(value = "#{authenticationManager}")
+	private AuthenticationManager authenticationManager = null;
 
-	@SuppressWarnings("finally")
-	public String doLogin() {
+	public String login() {
 		try {
-			ExternalContext context = FacesContext.getCurrentInstance()
-					.getExternalContext();
-			RequestDispatcher dispatcher = ((ServletRequest) context
-					.getRequest())
-					.getRequestDispatcher("/j_spring_security_check");
 
-			dispatcher.forward((ServletRequest) context.getRequest(),
-					(ServletResponse) context.getResponse());
-			FacesContext.getCurrentInstance().responseComplete();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			return null;
+			Authentication request = new UsernamePasswordAuthenticationToken(
+					this.getUserName(), this.getPassword());
+			Authentication result = authenticationManager.authenticate(request);
+			SecurityContextHolder.getContext().setAuthentication(result);
+		} catch (AuthenticationException e) {
+			MessageUtil.addInfoMessage(e.getMessage());
+			return "incorrect";
 		}
+		return "correct";
 	}
 
-	public void authorizedUserControl() {
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-
-		if (!authentication.getPrincipal().toString().equals("anonymousUser")) {
-			NavigationHandler nh = FacesContext.getCurrentInstance()
-					.getApplication().getNavigationHandler();
-			nh.handleNavigation(FacesContext.getCurrentInstance(), null,
-					"/pages/index.xhtml?faces-redirect=true");
-//			System.out.println(SecurityContextHolder.getContext()
-//					.getAuthentication().getPrincipal());
-		}
+	public String logout() {
+		SecurityContextHolder.clearContext();
+		return "loggedout";
 	}
+
+	public AuthenticationManager getAuthenticationManager() {
+		return authenticationManager;
+	}
+
+	public void setAuthenticationManager(
+			AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

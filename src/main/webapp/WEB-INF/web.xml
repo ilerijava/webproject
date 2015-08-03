@@ -7,7 +7,7 @@
 	<display-name>Personel Özlük Projesi</display-name>
 	
 	<welcome-file-list>
-		<welcome-file>/pages/unsecure/login.xhtml</welcome-file>
+		<welcome-file>pages/unsecure/login.xhtml</welcome-file>
 	</welcome-file-list>
 		
 	<context-param>
@@ -55,7 +55,7 @@
 
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>*</url-pattern>
+		<url-pattern>/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
@@ -67,7 +67,7 @@
 
 
 	
-		<filter-mapping>
+	<filter-mapping>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>

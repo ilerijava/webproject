@@ -5,6 +5,8 @@
  */
 package com.tutev.dao;
 
+import java.io.Serializable;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
@@ -16,7 +18,12 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Tutev
  */
-public class GenericDao {
+public class GenericDao implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 989736391622436170L;
 
 	SessionFactory sessionFactory;
 

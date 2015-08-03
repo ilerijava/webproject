@@ -1,35 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-
-	<title>Personel Özlük Projesi</title>
-	<f:metadata>
-		<f:event type="javax.faces.event.PreRenderViewEvent"
-			listener="#{loginView.authorizedUserControl}" />
-	</f:metadata>
 </h:head>
 <h:body>
-	<section class="container">
-		<div class="login">
-			<h:form prependId="false">
-				<h:panelGrid columns="2" cellpadding="8">
-					<h:outputLabel value="Kullanıcı Adı : " />
-					<p:inputText id="j_username"></p:inputText>
+	<div align="left" style="margin: 3px;">
+		<h:form id="loginFormId" prependId="false">
 
-					<h:outputLabel value="Şifre : " />
-					<p:password id="j_password"></p:password>
 
-					<p:commandButton id="giris" value="Giriş Yap"
-						action="#{loginView.doLogin}" ajax="false" icon="ui-icon-document" />
+			<h:outputText id="outTxtUserNameId" value="Kullanıcı Adı : "
+				name="outTxtUserNameNm"></h:outputText>
+				<p:inputText value="#{loginView.userName}"></p:inputText>
 
-					<h:outputLabel style="color:red;"
-						value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
-						rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
-				</h:panelGrid>
-			</h:form>
-		</div>
-	</section>
+
+			<h:outputText id="outTxtPasswordId" value="Şifre : "
+				name="outTxtPasswordNm"></h:outputText>
+			<p:password value="#{loginView.password}"></p:password>
+
+			<h:commandButton id="btnLoginId" value="Giriş Yap"
+				action="#{loginView.login}"></h:commandButton>
+
+		</h:form>
+	</div>
+	<div>
+		<h:messages></h:messages>
+	</div>
 </h:body>
 </html>
