@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-	version="2.0">
+              version="2.0">
 
-	<application>
-		<!-- Enable Spring -->
-		<el-resolver>
+    <application>
+        <!-- Enable Spring -->
+        <el-resolver>
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
+    </application>
 
-<!-- 		<locale-config> -->
-<!-- 			<default-locale>en</default-locale> -->
-<!-- 		</locale-config> -->
-
-<!-- 		<resource-bundle> -->
-<!-- 			<base-name>messages</base-name> -->
-<!-- 			<var>msg</var> -->
-<!-- 		</resource-bundle> -->
-	</application>
-	
-	    <!-- navigation-rule for login.xhtml -->
+    <!-- navigation-rule for login.xhtml -->
     <navigation-rule>
         <from-view-id>/pages/unsecure/login.xhtml</from-view-id>
         <!-- navigation-case for method login() -->
@@ -37,17 +28,4 @@
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-
-<!-- 	<system-event-listener> -->
-<!-- 		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class> -->
-<!-- 		<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class> -->
-<!-- 		<source-class>javax.faces.component.UIViewRoot</source-class> -->
-<!-- 	</system-event-listener> -->
-
-<!-- 	<system-event-listener> -->
-<!-- 		<system-event-listener-class>com.example.ViewScopeCallbackRegistrar</system-event-listener-class> -->
-<!-- 		<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class> -->
-<!-- 		<source-class>javax.faces.component.UIViewRoot</source-class> -->
-<!-- 	</system-event-listener> -->
-
 </faces-config>

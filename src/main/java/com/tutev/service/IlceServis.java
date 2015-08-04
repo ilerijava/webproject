@@ -6,53 +6,51 @@
 
 package com.tutev.service;
 
-import java.util.List;
-
 import com.tutev.dao.GenericDao;
 import com.tutev.entity.Il;
 import com.tutev.entity.Ilce;
-import com.tutev.entity.Kisi;
+
+import java.util.List;
 
 /**
- *
  * @author Tutev
  */
 public class IlceServis {
-	GenericDao genericDao = new GenericDao();
-	
-	IlServis ilServis = new IlServis();
+  GenericDao genericDao = new GenericDao();
 
-	public Ilce save(Ilce ilce) {
-		return (Ilce) genericDao.save(ilce);
-	}
+  IlServis ilServis = new IlServis();
 
-	public void update(Ilce ilce) {
-		if (ilce.getId() == null) {
-			return;
-		}
-		genericDao.saveOrUpdate(ilce);
-	}
+  public Ilce save(Ilce ilce) {
+    return (Ilce) genericDao.save(ilce);
+  }
 
-	public void delete(Ilce ilce) {
-		genericDao.delete(ilce);
-	}
+  public void update(Ilce ilce) {
+    if (ilce.getId() == null) {
+      return;
+    }
+    genericDao.saveOrUpdate(ilce);
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<Ilce> getAll() {
-		return (List<Ilce>) genericDao.get(Ilce.class);
-	}
+  public void delete(Ilce ilce) {
+    genericDao.delete(ilce);
+  }
 
-	public Ilce getById(String id) {
-		return (Ilce) genericDao.getById(Ilce.class, new Long(id));
-	}
+  @SuppressWarnings("unchecked")
+  public List<Ilce> getAll() {
+    return (List<Ilce>) genericDao.get(Ilce.class);
+  }
 
-	public List<Ilce> getAllById(String ilID) {
-		Il il = ilServis.getById(ilID);
-		String[] parameterNames = { "il" };
-		Object[] parameterValues = { il };
+  public Ilce getById(String id) {
+    return (Ilce) genericDao.getById(Ilce.class, new Long(id));
+  }
 
-		List<Ilce> list = (List<Ilce>) genericDao.get(parameterNames,
-				parameterValues, Ilce.class);
-		return list;
-	}
+  public List<Ilce> getAllById(String ilID) {
+    Il il = ilServis.getById(ilID);
+    String[] parameterNames = {"il"};
+    Object[] parameterValues = {il};
+
+    List<Ilce> list = (List<Ilce>) genericDao.get(parameterNames,
+        parameterValues, Ilce.class);
+    return list;
+  }
 }

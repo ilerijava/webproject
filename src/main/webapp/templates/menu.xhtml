@@ -1,33 +1,33 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+        >
 
-	<h:head></h:head>
+    <h:head></h:head>
 
-	<h:form>
-		<p:outputPanel id="menuPanel" layout="block">
-			<p:menu autoSubmenuDisplay="true"
-				style="width:213px; height:483px; border:none; font-size:small; padding:0px;"
-				type="sliding" backLabel="#{msg['menu.back']}">
+    <h:form>
+        <p:outputPanel id="menuPanel" layout="block">
+            <p:menu autoSubmenuDisplay="true"
+                    style="width:213px; height:483px; border:none; font-size:small; padding:0px;"
+                    type="sliding" backLabel="#{msg['menu.back']}">
 
-				<p:submenu label="Ana İşlemler">
-					<p:menuitem value="Kişi" outcome="/pages/secure/kisi" />
-				</p:submenu>
+                <p:submenu label="Ana İşlemler">
+                    <p:menuitem value="Kişi" outcome="/pages/secure/kisi"/>
+                </p:submenu>
 
-				<p:submenu label="Diğer">
-					<p:menuitem value="Sayfa 1" outcome="/pages/secure/page1" />
-					<p:menuitem value="Sayfa 2" outcome="/pages/secure/page2" />
-					<p:menuitem value="Sayfa 3" outcome="/pages/secure/page3" />
-					<p:menuitem value="Sayfa 4" outcome="/pages/secure/page4" />
-				</p:submenu>
+                <p:submenu label="Diğer">
+                    <p:menuitem value="Sayfa 1" outcome="/pages/secure/page1"/>
+                    <p:menuitem value="Sayfa 2" outcome="/pages/secure/page2"/>
+                    <p:menuitem value="Sayfa 3" outcome="/pages/secure/page3"/>
+                    <p:menuitem value="Sayfa 4" outcome="/pages/secure/page4"/>
+                </p:submenu>
 
-			</p:menu>
-		</p:outputPanel>
-	</h:form>
+            </p:menu>
+        </p:outputPanel>
+    </h:form>
 </ui:composition>
 
 

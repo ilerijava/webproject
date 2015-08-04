@@ -6,41 +6,36 @@
 
 package com.tutev.service;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.tutev.dao.GenericDao;
 import com.tutev.entity.Adres;
 
-/**
- *
- * @author Tutev
- */
+import java.io.Serializable;
+import java.util.List;
+
+@SuppressWarnings("unchecked")
 public class AdresServis implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6070600959662672452L;
 
-	GenericDao genericDao = new GenericDao();
+  private static final long serialVersionUID = 6070600959662672452L;
 
-	public Adres save(Adres adres) {
-		return (Adres) genericDao.save(adres);
-	}
+  GenericDao genericDao = new GenericDao();
 
-	public void update(Adres adres) {
-		if (adres.getId() == null) {
-			return;
-		}
-		genericDao.saveOrUpdate(adres);
-	}
+  public Adres save(Adres adres) {
+    return (Adres) genericDao.save(adres);
+  }
 
-	public void delete(Adres adres) {
-		genericDao.delete(adres);
-	}
+  public void update(Adres adres) {
+    if (adres.getId() == null) {
+      return;
+    }
+    genericDao.saveOrUpdate(adres);
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<Adres> getAll() {
-		return (List<Adres>) genericDao.get(Adres.class);
-	}
+  public void delete(Adres adres) {
+    genericDao.delete(adres);
+  }
+
+
+  public List<Adres> getAll() {
+    return (List<Adres>) genericDao.get(Adres.class);
+  }
 }

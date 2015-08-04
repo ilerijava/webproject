@@ -12,32 +12,31 @@ import com.tutev.entity.Personel;
 import java.util.List;
 
 /**
- *
  * @author Tutev
  */
 public class PersonelServis {
-	GenericDao genericDao = new GenericDao();
+  GenericDao genericDao = new GenericDao();
 
-	public void save(Personel personel) {
-		if (personel.getId() == null && personel.getPersonelSicilNo() == null) {
-			return;
-		}
-		genericDao.save(personel);
-	}
+  public void save(Personel personel) {
+    if (personel.getId() == null && personel.getPersonelSicilNo() == null) {
+      return;
+    }
+    genericDao.save(personel);
+  }
 
-	public void update(Personel personel) {
-		if (personel.getId() == null && personel.getPersonelSicilNo() == null) {
-			return;
-		}
-		genericDao.saveOrUpdate(personel);
-	}
+  public void update(Personel personel) {
+    if (personel.getId() == null && personel.getPersonelSicilNo() == null) {
+      return;
+    }
+    genericDao.saveOrUpdate(personel);
+  }
 
-	public void delete(Personel personel) {
-		genericDao.delete(personel);
-	}
+  public void delete(Personel personel) {
+    genericDao.delete(personel);
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<Personel> getAll() {
-		return (List<Personel>) genericDao.get(Personel.class);
-	}
+  @SuppressWarnings("unchecked")
+  public List<Personel> getAll() {
+    return (List<Personel>) genericDao.get(Personel.class);
+  }
 }

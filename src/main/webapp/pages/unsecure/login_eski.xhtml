@@ -1,32 +1,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
 
-	<title>Personel Özlük Projesi</title>
+    <title>Personel Özlük Projesi</title>
 
 </h:head>
 <h:body>
-	<section class="container">
-		<div class="login">
-			<h:form prependId="false">
-				<h:panelGrid columns="2" cellpadding="8">
-					<h:outputLabel value="Kullanıcı Adı : " />
-					<p:inputText id="j_username"></p:inputText>
+    <section class="container">
+        <div class="login">
+            <h:form prependId="false">
+                <h:panelGrid columns="2" cellpadding="8">
+                    <h:outputLabel value="Kullanıcı Adı : "/>
+                    <p:inputText id="j_username"></p:inputText>
 
-					<h:outputLabel value="Şifre : " />
-					<p:password id="j_password"></p:password>
+                    <h:outputLabel value="Şifre : "/>
+                    <p:password id="j_password"></p:password>
 
-					<p:commandButton id="giris" value="Giriş Yap"
-						action="#{loginView.doLogin}" ajax="false" icon="ui-icon-document" />
+                    <p:commandButton id="giris" value="Giriş Yap"
+                                     action="#{loginView.doLogin}" ajax="false" icon="ui-icon-document"/>
 
-					<h:outputLabel style="color:red;"
-						value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
-						rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
-				</h:panelGrid>
-			</h:form>
-		</div>
-	</section>
+                    <h:outputLabel style="color:red;"
+                                   value="#{sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+                                   rendered="#{!empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </section>
 </h:body>
 </html>

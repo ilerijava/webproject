@@ -1,48 +1,48 @@
 package com.tutev.entity;
 
 public class Tema {
-	private int id;
+  private int id;
 
-	private String displayName;
+  private String displayName;
 
-	private String name;
+  private String name;
 
-	public Tema() {
-	}
+  public Tema() {
+  }
 
-	public Tema(int id, String displayName, String name) {
-		this.id = id;
-		this.displayName = displayName;
-		this.name = name;
-	}
+  public Tema(int id, String displayName, String name) {
+    this.id = id;
+    this.displayName = displayName;
+    this.name = name;
+  }
 
-	public int getId() {
-		return id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+  public String getDisplayName() {
+    return displayName;
+  }
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+  public void setDisplayName(String displayName) {
+    this.displayName = displayName;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	@Override
-	public String toString() {
-		return name;
-	}
+  @Override
+  public String toString() {
+    return name;
+  }
 
 }

@@ -6,38 +6,37 @@
 
 package com.tutev.service;
 
-import java.util.List;
-
 import com.tutev.dao.GenericDao;
 import com.tutev.entity.Firma;
 
+import java.util.List;
+
 /**
- *
  * @author Tutev
  */
 public class FirmaServis {
-	GenericDao genericDao = new GenericDao();
+  GenericDao genericDao = new GenericDao();
 
-	public void save(Firma firma) {
-		if (firma.getId() == null) {
-			return;
-		}
-		genericDao.save(firma);
-	}
+  public void save(Firma firma) {
+    if (firma.getId() == null) {
+      return;
+    }
+    genericDao.save(firma);
+  }
 
-	public void update(Firma firma) {
-		if (firma.getId() == null) {
-			return;
-		}
-		genericDao.saveOrUpdate(firma);
-	}
+  public void update(Firma firma) {
+    if (firma.getId() == null) {
+      return;
+    }
+    genericDao.saveOrUpdate(firma);
+  }
 
-	public void delete(Firma firma) {
-		genericDao.delete(firma);
-	}
+  public void delete(Firma firma) {
+    genericDao.delete(firma);
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<Firma> getAll() {
-		return (List<Firma>) genericDao.get(Firma.class);
-	}
+  @SuppressWarnings("unchecked")
+  public List<Firma> getAll() {
+    return (List<Firma>) genericDao.get(Firma.class);
+  }
 }

@@ -1,7 +1,5 @@
 package com.tutev.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,73 +10,71 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "KULLANICI")
 public class Kullanici implements Serializable {
 
-	private static final long serialVersionUID = 32432432432432432L;
-	Long id;
-    String username;
-    String password;
-    Kisi kisi;
+  private static final long serialVersionUID = 32432432432432432L;
+  Long id;
+  String username;
+  String password;
+  Kisi kisi;
 
-    public Kullanici() {
-    }
+  public Kullanici() {
+  }
 
-    public Kullanici(Long id, String username, String password, Kisi kisi) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.kisi = kisi;
-    }
-    
-    
+  public Kullanici(Long id, String username, String password, Kisi kisi) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.kisi = kisi;
+  }
 
-    @Id
-    @Column(name = "id")
-    @SequenceGenerator(allocationSize = 1, name = "seq_kullanici_id", initialValue = 1, sequenceName = "seq_kullanici_id")
-    @GeneratedValue(generator = "seq_kullanici_id", strategy = GenerationType.SEQUENCE)
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Id
+  @Column(name = "id")
+  @SequenceGenerator(allocationSize = 1, name = "seq_kullanici_id", initialValue = 1, sequenceName = "seq_kullanici_id")
+  @GeneratedValue(generator = "seq_kullanici_id", strategy = GenerationType.SEQUENCE)
+  public Long getId() {
+    return id;
+  }
 
-    @Column(unique = true,name = "username",length = 100,nullable = false,updatable = false)
-    public String getUsername() {
-        return username;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  @Column(unique = true, name = "username", length = 100, nullable = false, updatable = false)
+  public String getUsername() {
+    return username;
+  }
 
-    @Column(name = "password",length = 100)
-    public String getPassword() {
-        return password;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  @Column(name = "password", length = 100)
+  public String getPassword() {
+    return password;
+  }
 
-    @JoinColumn(name = "kisi_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    public Kisi getKisi() {
-        return kisi;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setKisi(Kisi kisi) {
-        this.kisi = kisi;
-    }
+  @JoinColumn(name = "kisi_id")
+  @ManyToOne(fetch = FetchType.LAZY)
+  public Kisi getKisi() {
+    return kisi;
+  }
 
-    @Override
-    public String toString() {
-        return "Kullanici{" + "id=" + id + ", username=" + username + ", password=" + password + ", kisi=" + kisi + '}';
-    }
+  public void setKisi(Kisi kisi) {
+    this.kisi = kisi;
+  }
 
-    
+  @Override
+  public String toString() {
+    return "Kullanici{" + "id=" + id + ", username=" + username + ", password=" + password + ", kisi=" + kisi + '}';
+  }
 }
