@@ -14,17 +14,20 @@
                     style="width:213px; height:483px; border:none; font-size:small; padding:0px;"
                     type="sliding" backLabel="#{msg['menu.back']}">
 
-                <p:submenu label="Ana İşlemler">
-                    <p:menuitem value="Kişi" outcome="/pages/secure/kisi"/>
+                <p:submenu icon="ui-icon-grip-dotted-vertical" label="Hesap">
+                    <p:menuitem icon="ui-icon-home" ajax="false" value="Anasayfa" id="index"
+                                action="#{loginView.index}"/>
+                    <p:menuitem icon="ui-icon-close" ajax="false" value="Çıkış Yap" id="logout"
+                                action="#{loginView.logout}"/>
                 </p:submenu>
 
-                <p:submenu label="Diğer">
+                <p:submenu label="İşlemler">
+                    <p:menuitem icon="ui-icon-person" value="Kişi" outcome="/pages/secure/kisi"/>
                     <p:menuitem value="Sayfa 1" outcome="/pages/secure/page1"/>
                     <p:menuitem value="Sayfa 2" outcome="/pages/secure/page2"/>
                     <p:menuitem value="Sayfa 3" outcome="/pages/secure/page3"/>
                     <p:menuitem value="Sayfa 4" outcome="/pages/secure/page4"/>
                 </p:submenu>
-
             </p:menu>
         </p:outputPanel>
     </h:form>

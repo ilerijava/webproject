@@ -39,16 +39,10 @@ public class KisiBean implements Serializable {
   @ManagedProperty(value = "#{AdresServis}")
   AdresServis adresServis;
 
-  @ManagedProperty("#{TemaServis}")
-  private TemaServis temaServis;
-
-  private List<Kisi> kisiList;
-
   private Kisi selectedKisi = new Kisi();
-
+  private List<Kisi> kisiList;
   private List<Il> ilList = new ArrayList<Il>();
   private List<Ilce> ilceList = new ArrayList<Ilce>();
-  private List<Tema> temaList;
 
   public static long getSerialVersionUID() {
     return serialVersionUID;
@@ -56,7 +50,6 @@ public class KisiBean implements Serializable {
 
   @PostConstruct
   public void initialize() {
-    setTemaList(temaServis.getTemaList());
     setKisiList(kisiServis.getAll());
     setIlList((ilServis.getAll()));
     if (selectedKisi.getAdres().getIl().getId() == null) {
@@ -105,14 +98,6 @@ public class KisiBean implements Serializable {
       setIlceList(ilceServis.getAllById(selectedKisi.getAdres().getIl()
           .getId().toString()));
     }
-  }
-
-  public List<Tema> getTemaList() {
-    return temaList;
-  }
-
-  public void setTemaList(List<Tema> temaList) {
-    this.temaList = temaList;
   }
 
   public void listeYenile() {
@@ -189,13 +174,5 @@ public class KisiBean implements Serializable {
 
   public void setAdresServis(AdresServis adresServis) {
     this.adresServis = adresServis;
-  }
-
-  public TemaServis getTemaServis() {
-    return temaServis;
-  }
-
-  public void setTemaServis(TemaServis servis) {
-    this.temaServis = servis;
   }
 }

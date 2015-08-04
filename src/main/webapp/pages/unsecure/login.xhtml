@@ -2,27 +2,38 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-        >
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
+
 </h:head>
 <h:body>
     <div align="left" style="margin: 3px;">
-        <h:form id="loginFormId" prependId="false">
 
 
-            <h:outputText id="outTxtUserNameId" value="Kullanıcı Adı : "
-                          name="outTxtUserNameNm"></h:outputText>
-            <p:inputText value="#{loginView.userName}"></p:inputText>
+
+        <h:form id="loginFormId" prependId="false"
+                styleClass="ui-fieldset ui-widget ui-widget-content ui-corner-all ui-hidden-container">
+
+            <h:panelGrid cellpadding="3"
+                         style="font-size:24px;">
+                <p:outputLabel value="#{msg['header.title']}"/>
+            </h:panelGrid>
+
+            <h:panelGrid cellpadding="3"  style="margin-top: 20px;" rendered="true">
+                <h:outputText id="outTxtUserNameId" value="Kullanıcı Adı : "
+                              name="outTxtUserNameNm"></h:outputText>
+                <p:inputText value="#{loginView.userName}"></p:inputText>
 
 
-            <h:outputText id="outTxtPasswordId" value="Şifre : "
-                          name="outTxtPasswordNm"></h:outputText>
-            <p:password value="#{loginView.password}"></p:password>
+                <h:outputText id="outTxtPasswordId" value="Şifre : "
+                              name="outTxtPasswordNm"></h:outputText>
+                <p:password value="#{loginView.password}"></p:password>
 
-            <h:commandButton id="btnLoginId" value="Giriş Yap"
-                             action="#{loginView.login}"></h:commandButton>
-
+                <h:commandButton id="btnLoginId" value="Giriş Yap"
+                                 style="margin: 3px; float:right;"
+                                 styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                                 action="#{loginView.login}"></h:commandButton>
+            </h:panelGrid>
         </h:form>
     </div>
     <div>

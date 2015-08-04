@@ -14,10 +14,11 @@
 
     <h:panelGrid columns="2" cellpadding="10" style="float:right;">
         <p:outputLabel value="Tema:"/>
-        <p:themeSwitcher style="width:165px">
+        <p:themeSwitcher style="width:165px" value="#{temaView.tema}" >
             <f:selectItem itemLabel="Tema Seç" itemValue="-1"/>
-            <f:selectItems value="#{kisiView.temaList}" var="tema"
+            <f:selectItems value="#{temaView.temaList}"
                            itemLabel="#{tema.displayName}" itemValue="#{tema.name}"/>
+            <p:ajax event="change" listener="#{temaView.seciliTemaKaydet}" />
         </p:themeSwitcher>
     </h:panelGrid>
 

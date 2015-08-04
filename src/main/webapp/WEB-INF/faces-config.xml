@@ -10,6 +10,16 @@
         <el-resolver>
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
+
+        <locale-config>
+            <default-locale>en</default-locale>
+        </locale-config>
+
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+
     </application>
 
     <!-- navigation-rule for login.xhtml -->
@@ -20,12 +30,44 @@
             <from-action>#{loginView.login}</from-action>
             <from-outcome>correct</from-outcome>
             <to-view-id>/pages/secure/index.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <!-- navigation-case for method login() -->
         <navigation-case>
             <from-action>#{loginView.login}</from-action>
             <from-outcome>incorrect</from-outcome>
             <to-view-id>/pages/unsecure/login.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
+
+    <!-- navigation-rule for kisi.xhtml -->
+    <navigation-rule>
+        <from-view-id>/pages/secure/kisi.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{kisiView.kaydet}</from-action>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{kisiView.sil}</from-action>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/pages/unsecure/error.xhtml</to-view-id>
+        </navigation-case>
+        <!-- navigation case for method logout() -->
+        <navigation-case>
+            <from-action>#{loginView.logout}</from-action>
+            <from-outcome>loggedout</from-outcome>
+            <to-view-id>/</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{loginView.index}</from-action>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/pages/secure/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
 </faces-config>
