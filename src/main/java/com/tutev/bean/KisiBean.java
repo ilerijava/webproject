@@ -26,19 +26,33 @@ import java.util.List;
 public class KisiBean implements Serializable {
 
   private static final long serialVersionUID = 1L;
-  IlServis ilServis = new IlServis();
-  IlceServis ilceServis = new IlceServis();
-  KisiServis kisiServis = new KisiServis();
-  AdresServis adresServis = new AdresServis();
-  private List<Kisi> kisiList;
-  @ManagedProperty("#{temaServis}")
+
+  @ManagedProperty(value = "#{IlServis}")
+  IlServis ilServis;
+
+  @ManagedProperty(value = "#{IlceServis}")
+  IlceServis ilceServis;
+
+  @ManagedProperty(value = "#{KisiServis}")
+  KisiServis kisiServis;
+
+  @ManagedProperty(value = "#{AdresServis}")
+  AdresServis adresServis;
+
+  @ManagedProperty("#{TemaServis}")
   private TemaServis temaServis;
+
+  private List<Kisi> kisiList;
 
   private Kisi selectedKisi = new Kisi();
 
   private List<Il> ilList = new ArrayList<Il>();
   private List<Ilce> ilceList = new ArrayList<Ilce>();
   private List<Tema> temaList;
+
+  public static long getSerialVersionUID() {
+    return serialVersionUID;
+  }
 
   @PostConstruct
   public void initialize() {
@@ -113,7 +127,7 @@ public class KisiBean implements Serializable {
       MessageUtil.addInfoMessage(selectedKisi.getAd() + " "
           + selectedKisi.getSoyad() + " Eklendi");
     } else {
-      adresServis.update(selectedKisi.getAdres());
+     // adresServis.update(selectedKisi.getAdres());
       kisiServis.update(selectedKisi);
       MessageUtil.addInfoMessage(selectedKisi.getAd() + " "
           + selectedKisi.getSoyad() + " Düzenlendi");
@@ -143,6 +157,42 @@ public class KisiBean implements Serializable {
 
     ilceList = ilceServis.getAllById(selectedKisi.getAdres().getIl()
         .getId().toString());
+  }
+
+  public IlServis getIlServis() {
+    return ilServis;
+  }
+
+  public void setIlServis(IlServis ilServis) {
+    this.ilServis = ilServis;
+  }
+
+  public IlceServis getIlceServis() {
+    return ilceServis;
+  }
+
+  public void setIlceServis(IlceServis ilceServis) {
+    this.ilceServis = ilceServis;
+  }
+
+  public KisiServis getKisiServis() {
+    return kisiServis;
+  }
+
+  public void setKisiServis(KisiServis kisiServis) {
+    this.kisiServis = kisiServis;
+  }
+
+  public AdresServis getAdresServis() {
+    return adresServis;
+  }
+
+  public void setAdresServis(AdresServis adresServis) {
+    this.adresServis = adresServis;
+  }
+
+  public TemaServis getTemaServis() {
+    return temaServis;
   }
 
   public void setTemaServis(TemaServis servis) {

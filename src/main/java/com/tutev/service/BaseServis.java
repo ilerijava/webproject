@@ -1,66 +1,73 @@
 package com.tutev.service;
 
-import com.tutev.util.QueryResult;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
-
-@Repository("baseService")
+@Repository
+@SuppressWarnings("rawtypes")
 public class BaseServis {
 
   @Autowired
-  private transient SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 
-  @Transactional(readOnly = false)
-  public void save(Object o) {
-    try {
-      getSession().save(o);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  public SessionFactory getSessionFactory() {
+    return sessionFactory;
   }
 
-  @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-  public void saveOrUpdate(Object o) {
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
+
+  public Object save(Object o) {
     try {
       Session session = getSession();
-      session.saveOrUpdate(o);
+      session.save(o);
+      session.flush();
+      Object savedObject = get(o.getClass());
+      return savedObject;
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
   }
 
-  @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
   public void delete(Object o) {
     try {
       Session session = getSession();
       session.delete(o);
+      session.flush();
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
   public void update(Object o) {
     try {
       Session session = getSession();
       session.update(o);
+      session.flush();
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  @Transactional(propagation = Propagation.REQUIRED)
-  public Object getById(@SuppressWarnings("rawtypes") Class cls, Long id) {
+  public Object get(Class cls) {
+    Object o = null;
+    try {
+      Session session = getSession();
+      o = session.createCriteria(cls).addOrder(Order.desc("id")).list();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return o;
+  }
+
+  public Object getById(Class cls, Long id) {
     Object o = null;
     try {
       Session session = getSession();
@@ -74,26 +81,26 @@ public class BaseServis {
     return o;
   }
 
-  public QueryResult getByFilter(int first, int pageSize, SortOrder sortOrder, Map<String, String> filters, Criteria criteria) {
-    QueryResult qr = new QueryResult();
-    criteria.setProjection(Projections.rowCount());
-    qr.setCount(((Long) criteria.uniqueResult()).intValue());
+  public Object get(String[] parameterNames, Object[] parameterValues,
+                    Class cls) {
+    Object o = null;
+    try {
+      Criteria criteria = getSession().createCriteria(cls);
 
-    criteria.setProjection(null);
-    criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-    qr.setList(criteria.setFirstResult(first).setMaxResults(pageSize).list());
-    return qr;
+      for (int i = 0; i < parameterNames.length; i++) {
+        criteria = criteria.add(Restrictions.eq(parameterNames[i],
+            parameterValues[i]));
+      }
+      o = criteria.list();
+      return o;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return o;
+    }
   }
 
   public Session getSession() {
-    return getSessionFactory().getCurrentSession();
-  }
-
-  public SessionFactory getSessionFactory() {
-    return sessionFactory;
-  }
-
-  public void setSessionFactory(SessionFactory sessionFactory) {
-    this.sessionFactory = sessionFactory;
+    Session currentSession = getSessionFactory().openSession();
+    return currentSession;
   }
 }

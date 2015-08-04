@@ -22,16 +22,16 @@ import java.util.List;
 public class UserServiceImpl implements UserDetailsService {
 
   @Autowired
-  private transient RolServis rolServis;
+  private transient LoginServis loginServis;
 
   @Override
   public UserDetails loadUserByUsername(String username)
       throws UsernameNotFoundException {
-    Kullanici kullanici = rolServis.getUserByName(username);
+    Kullanici kullanici = loginServis.getUserByName(username);
     if (kullanici != null) {
 
       Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-      List<KullaniciYetkiRol> list = rolServis
+      List<KullaniciYetkiRol> list = loginServis
           .getKullaniciRolByKullaniciId(kullanici.getId());
 
       for (KullaniciYetkiRol kYetkiRol : list) {

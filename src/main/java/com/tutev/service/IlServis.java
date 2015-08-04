@@ -1,48 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.tutev.service;
 
-import com.tutev.dao.GenericDao;
 import com.tutev.entity.Il;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.List;
 
+@Service("IlServis")
+@Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
-public class IlServis implements Serializable {
+public class IlServis {
 
-  /**
-   *
-   */
-  private static final long serialVersionUID = 7808345258454958968L;
+  @Autowired
+  BaseServis baseServis;
 
-  GenericDao genericDao = new GenericDao();
-
-  public Il save(Il il) {
-    return (Il) genericDao.save(il);
+  public BaseServis getBaseServis() {
+    return baseServis;
   }
 
+  public void setBaseServis(BaseServis baseServis) {
+    this.baseServis = baseServis;
+  }
+
+  @Transactional(readOnly = false)
+  public Il save(Il il) {
+    return (Il) baseServis.save(il);
+  }
+
+  @Transactional(readOnly = false)
   public void update(Il il) {
     if (il.getId() == null) {
       return;
     }
-    genericDao.saveOrUpdate(il);
+    baseServis.update(il);
   }
 
+  @Transactional(readOnly = false)
   public void delete(Il il) {
-    genericDao.delete(il);
+    baseServis.delete(il);
   }
-
 
   public List<Il> getAll() {
-    return (List<Il>) genericDao.get(Il.class);
+    return (List<Il>) baseServis.get(Il.class);
   }
 
   public Il getById(String id) {
-    return (Il) genericDao.getById(Il.class, new Long(id));
+    return (Il) baseServis.getById(Il.class, new Long(id));
   }
 }

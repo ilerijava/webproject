@@ -19,16 +19,6 @@
     <context:annotation-config/>
     <context:spring-configured/>
 
-    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-        <property name="scopes">
-            <map>
-                <entry key="view">
-                    <bean class="com.tutev.util.ViewScope"/>
-                </entry>
-            </map>
-        </property>
-    </bean>
-
     <bean id="DataSource" class="org.postgresql.jdbc3.Jdbc3PoolingDataSource">
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="5432"/>
@@ -45,7 +35,7 @@
         <property name="packagesToScan" value="com.tutev"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>

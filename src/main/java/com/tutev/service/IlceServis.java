@@ -1,47 +1,64 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.tutev.service;
 
-import com.tutev.dao.GenericDao;
 import com.tutev.entity.Il;
 import com.tutev.entity.Ilce;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * @author Tutev
- */
+@Service("IlceServis")
+@Transactional(readOnly = true)
+@SuppressWarnings("unchecked")
 public class IlceServis {
-  GenericDao genericDao = new GenericDao();
 
-  IlServis ilServis = new IlServis();
+  @Autowired
+  BaseServis baseServis;
 
-  public Ilce save(Ilce ilce) {
-    return (Ilce) genericDao.save(ilce);
+  @Autowired
+  IlServis ilServis;
+
+  public BaseServis getBaseServis() {
+    return baseServis;
   }
 
+  public void setBaseServis(BaseServis baseServis) {
+    this.baseServis = baseServis;
+  }
+
+  public IlServis getIlServis() {
+    return ilServis;
+  }
+
+  public void setIlServis(IlServis ilServis) {
+    this.ilServis = ilServis;
+  }
+
+  @Transactional(readOnly = false)
+  public Ilce save(Ilce ilce) {
+    return (Ilce) baseServis.save(ilce);
+  }
+
+  @Transactional(readOnly = false)
   public void update(Ilce ilce) {
     if (ilce.getId() == null) {
       return;
     }
-    genericDao.saveOrUpdate(ilce);
+    baseServis.update(ilce);
   }
 
+  @Transactional(readOnly = false)
   public void delete(Ilce ilce) {
-    genericDao.delete(ilce);
+    baseServis.delete(ilce);
   }
 
-  @SuppressWarnings("unchecked")
   public List<Ilce> getAll() {
-    return (List<Ilce>) genericDao.get(Ilce.class);
+    return (List<Ilce>) baseServis.get(Ilce.class);
   }
 
   public Ilce getById(String id) {
-    return (Ilce) genericDao.getById(Ilce.class, new Long(id));
+    return (Ilce) baseServis.getById(Ilce.class, new Long(id));
   }
 
   public List<Ilce> getAllById(String ilID) {
@@ -49,7 +66,7 @@ public class IlceServis {
     String[] parameterNames = {"il"};
     Object[] parameterValues = {il};
 
-    List<Ilce> list = (List<Ilce>) genericDao.get(parameterNames,
+    List<Ilce> list = (List<Ilce>) baseServis.get(parameterNames,
         parameterValues, Ilce.class);
     return list;
   }

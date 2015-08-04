@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import java.util.ArrayList;
 import java.util.List;
 
-@ManagedBean(name = "temaServis", eager = true)
+@ManagedBean(name = "TemaServis", eager = true)
 @ApplicationScoped
 public class TemaServis {
 

@@ -1,41 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.tutev.service;
 
 import com.tutev.dao.GenericDao;
 import com.tutev.entity.Adres;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Service("AdresServis")
+@Transactional(readOnly = true)
 @SuppressWarnings("unchecked")
-public class AdresServis implements Serializable {
+public class AdresServis {
 
-  private static final long serialVersionUID = 6070600959662672452L;
+  @Autowired
+  BaseServis baseServis;
 
-  GenericDao genericDao = new GenericDao();
-
-  public Adres save(Adres adres) {
-    return (Adres) genericDao.save(adres);
+  public BaseServis getBaseServis() {
+    return baseServis;
   }
 
+  public void setBaseServis(BaseServis baseServis) {
+    this.baseServis = baseServis;
+  }
+
+  @Transactional(readOnly = false)
+  public Adres save(Adres adres) {
+    return (Adres) baseServis.save(adres);
+  }
+
+  @Transactional(readOnly = false)
   public void update(Adres adres) {
     if (adres.getId() == null) {
       return;
     }
-    genericDao.saveOrUpdate(adres);
+    baseServis.update(adres);
   }
 
+  @Transactional(readOnly = false)
   public void delete(Adres adres) {
-    genericDao.delete(adres);
+    baseServis.delete(adres);
   }
-
 
   public List<Adres> getAll() {
-    return (List<Adres>) genericDao.get(Adres.class);
+    return (List<Adres>) baseServis.get(Adres.class);
   }
 }

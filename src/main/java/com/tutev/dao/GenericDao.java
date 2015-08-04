@@ -11,12 +11,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 
+@Repository("genericDao")
 public class GenericDao implements Serializable {
 
+
   private static final long serialVersionUID = 989736391622436170L;
+
+  @Autowired
+  private transient SessionFactory sessionFactory;
 
   public Object save(Object object) {
     try {
