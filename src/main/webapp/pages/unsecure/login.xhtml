@@ -1,32 +1,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-        >
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
+
 </h:head>
 <h:body>
-    <div align="left" style="margin: 3px;">
-        <h:form id="loginFormId" prependId="false">
+	<div align="left" style="margin: 3px;">
+
+		<center>
+			<h:outputText value="Personel Özlük Projesi" style="font-size: 24px;" />
+		</center>
+
+		<h:form id="loginFormId" prependId="false"
+			styleClass="ui-fieldset ui-widget ui-widget-content ui-corner-all ui-hidden-container">
+
+			<h:panelGrid rendered="true">
+				<h:outputText id="outTxtUserNameId" value="Kullanıcı Adı : "
+					name="outTxtUserNameNm"></h:outputText>
+				<p:inputText value="#{loginView.userName}"></p:inputText>
 
 
-            <h:outputText id="outTxtUserNameId" value="Kullanıcı Adı : "
-                          name="outTxtUserNameNm"></h:outputText>
-            <p:inputText value="#{loginView.userName}"></p:inputText>
+				<h:outputText id="outTxtPasswordId" value="Şifre : "
+					name="outTxtPasswordNm"></h:outputText>
+				<p:password value="#{loginView.password}"></p:password>
 
-
-            <h:outputText id="outTxtPasswordId" value="Şifre : "
-                          name="outTxtPasswordNm"></h:outputText>
-            <p:password value="#{loginView.password}"></p:password>
-
-            <h:commandButton id="btnLoginId" value="Giriş Yap"
-                             action="#{loginView.login}"></h:commandButton>
-
-        </h:form>
-    </div>
-    <div>
-        <h:messages></h:messages>
-    </div>
+				<h:commandButton id="btnLoginId" value="Giriş Yap"
+					style="margin: 3px; float:right;"
+					styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+					action="#{loginView.login}"></h:commandButton>
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<div>
+		<h:messages></h:messages>
+	</div>
 </h:body>
 </html>
