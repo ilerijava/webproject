@@ -30,9 +30,7 @@ public class TemaBean {
   }
 
   public void seciliTemaKaydet() {
-
       System.out.println(tema);
-
   }
 
   public List<Tema> getTemaList() {

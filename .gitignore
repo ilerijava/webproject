@@ -16,6 +16,9 @@ hs_err_pid*
 .project
 .settings/
 
+# IntellijIdea
+*.iml
+
 # Maven
 target/
 **/target/
